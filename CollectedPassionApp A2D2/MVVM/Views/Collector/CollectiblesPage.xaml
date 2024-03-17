@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:CollectedPassionApp_A2D2.MVVM.ViewModels"
+             x:Class="CollectedPassionApp_A2D2.MVVM.Views.Collector.CollectiblesPage"
+             x:DataType="vm:CollectiblesViewModel">
+    
+        <ContentPage.BindingContext>
+            <vm:CollectiblesViewModel/>
+        </ContentPage.BindingContext>
+    
+        <VerticalStackLayout Padding="30">
+            <Entry Placeholder="Collectible Name" Text="{Binding Name}"/>
+            <Entry Placeholder="Description" Text="{Binding Description}"/>
+            <Picker ItemsSource="{Binding Categories}"
+                    ItemDisplayBinding="{Binding Catname}"
+                    SelectedItem="{Binding SelectedCategory}"/>
+            <Button Text="Add Collectible" Command="{Binding AddCollectibleCommand}" />
+            <Button x:Name="BTNDELCollected" Text="Delete Selectedcollected" Command="{Binding DelSelectedCollected}"  />
+
+
+
+        <ListView x:Name="LISTVCollection" VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Always" 
+                 SelectedItem="{Binding SelectedCollectable}" ItemsSource="{Binding Items}">
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <TextCell Text="{Binding Name}" Detail="{Binding Description}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
+
+
+
+</ContentPage>

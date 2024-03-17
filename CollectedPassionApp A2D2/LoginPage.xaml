@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CollectedPassionApp_A2D2.LoginPage"
+             Title="LoginPage">
+    <ScrollView>
+
+        <VerticalStackLayout
+            
+        Spacing="25"
+        Padding="30,0"
+        VerticalOptions="Center">
+
+            <Label Text="inlognaam"/>
+            <Entry x:Name="ENTusername"/>
+
+            <Label Text="Wachtwoord"/>
+            <Entry x:Name="ENTPassword" IsPassword="True"/>
+
+            <StackLayout Orientation="Horizontal" VerticalOptions="Start">
+                <Label Text="Toon wachtwoord" VerticalOptions="Center" />
+                <Switch x:Name="showPasswordSwitch" Toggled="showPasswordSwitch_Toggled"     />
+            </StackLayout>
+
+            <Button x:Name="BTNForgorPassword" 
+                    BackgroundColor="Transparent" 
+                    BorderColor="Transparent" 
+                    TextColor="{StaticResource Primary}" 
+                    FontAttributes="Bold"
+                    Text="Wachtwoord vergeten?"
+                    Clicked="BTNForgorPassword_Clicked"  
+                    />
+
+
+
+            <Button x:Name="BTNLogin" Text="Log in" Clicked="BTNLogin_Clicked"/>
+
+            <Label Text="Heb je nog geen account?"/>
+            <Button x:Name="BTNRegister" 
+                    BackgroundColor="Transparent" 
+                    BorderColor="Transparent" 
+                    TextColor="{StaticResource Primary}" 
+                    FontAttributes="Bold"
+                    Text="Maak een nieuw account aan" 
+                    Clicked="BTNRegister_Clicked"
+                    />
+
+            <Button x:Name="BTNContinue" Text="Log niet in" Clicked="BTNContinue_Clicked"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

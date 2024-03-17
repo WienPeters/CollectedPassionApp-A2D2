@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CollectedPassionApp_A2D2.MVVM.Views.Guest.CreateUserPage"
+             Title="CreateUserPage">
+   
+        <VerticalStackLayout
+        Spacing="25"
+        Padding="30,0"
+        VerticalOptions="Center">
+
+            
+
+        <Label Text="Username"/>
+        <Entry x:Name="ENTUserName"/>
+
+        <Label Text="Email"/>
+        <Entry x:Name="ENTEmail"/>
+
+
+        <Label Text="Wachtwoord"/>
+            <Entry x:Name="ENTPassword" IsPassword="True"/>
+        
+
+
+        <Button Text="Aanmaken" x:Name="BTNRegister" Clicked="BTNRegister_Clicked"  />
+
+
+        </VerticalStackLayout>
+    
+</ContentPage>

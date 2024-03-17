@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CollectedPassionApp_A2D2.MVVM.Views.Collector.MarketplaceViwe"
+             Title="MarketplaceViwe">
+    <VerticalStackLayout>
+        <SearchBar x:Name="SEARchbar" Placeholder="Search wanted item" />
+        <Entry Placeholder="Collectible Name" Text="{Binding Name}"/>
+        <Entry Placeholder="Description" Text="{Binding Description}"/>
+        <Picker ItemsSource="{Binding Categories}"
+        ItemDisplayBinding="{Binding Catname}"
+        SelectedItem="{Binding SelectedCategory}"/>
+    </VerticalStackLayout>
+</ContentPage>
