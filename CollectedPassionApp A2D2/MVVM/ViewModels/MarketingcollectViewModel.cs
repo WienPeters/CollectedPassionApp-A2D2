@@ -1,38 +1,206 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using CollectedPassionApp_A2D2.MVVM.Models;
 using Microsoft.Maui.Media;
 
 namespace CollectedPassionApp_A2D2.MVVM.ViewModels
 {
-    public class MarketingcollectViewModel
+    public class MarketingcollectViewModel : INotifyPropertyChanged
     {
-        public async Task<Stream> PickOrTakePhotoAsync()
+
+        #region variables
+
+        private List<Category> _categories;
+        public List<Category> Categories
         {
-
-
-            // Request camera and storage permissions
-            var cameraStatus = await Permissions.RequestAsync<Permissions.Camera>();
-            var storageStatus = await Permissions.RequestAsync<Permissions.StorageRead>();
-
-            if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+            get { return _categories; }
+            set
             {
-                // Permissions not granted
-                return null;
+                if (_categories != value)
+                {
+                    _categories = value;
+                    OnPropertyChanged(nameof(Categories));
+                }
+            }
+        }
+        private Category _selectedCategory;
+        public Category SelectedCategory
+        {
+            get => _selectedCategory;
+            set
+            {
+                if (_selectedCategory != value)
+                {
+                    _selectedCategory = value;
+                    OnPropertyChanged(nameof(SelectedCategory));
+                    // Optionally, filter collectibles by selected category
+                }
+            }
+        }
+        private string _name;
+        public string Name
+        {
+            get => _name;
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    OnPropertyChanged(nameof(Name));
+                }
+            }
+        }
+        private string _description;
+        public string Description
+        {
+            get => _description;
+            set
+            {
+                if (_description != value)
+                {
+                    _description = value;
+                    OnPropertyChanged(nameof(Description));
+                }
+            }
+        }
+        private double _price;
+        public double Price
+        {
+            get => _price;
+            set
+            {
+                if (value != _price)
+                {
+                    _price = value;
+                    OnPropertyChanged(nameof(Price));
+                }
+            }
+        }
+        private bool _tradable;
+        public bool Tradable
+        {
+            get => _tradable;
+            set
+            {
+                if (value != _tradable)
+                {
+                    _tradable = value;
+                    OnPropertyChanged(nameof(Tradable));
+                }
+            }
+        }
+        private string _imagepath;
+        public string ImagePath
+        {
+            get => _imagepath;
+            set
+            {
+                if (value != _imagepath)
+                {
+                    _imagepath = value;
+                    OnPropertyChanged(nameof(ImagePath));
+
+                }
+            }
+        }
+        private List<Noncollectable> _noncollectibles;
+        public List<Noncollectable> Noncollectables
+        {
+            get => Noncollectables;
+            set
+            {
+                if (_noncollectibles != value)
+                {
+                    _noncollectibles = value;
+                    OnPropertyChanged(nameof(Noncollectables));
+                }
+            }
+        }
+
+        #endregion 
+        public ObservableCollection<Noncollectable> Items { get; set; } = new ObservableCollection<Noncollectable>();
+
+        public ICommand AddNonCollectibleCommand { get; private set; }
+        public ICommand TakePhotoCommand { get; }
+        public ICommand PickPhotoCommand { get; }
+
+        
+
+
+        public MarketingcollectViewModel()
+        {
+            GetAllCategories();
+            GetNonCollectables();
+            TakePhotoCommand = new Command(async () => await TakePhotoAsync());
+            PickPhotoCommand = new Command(async () =>
+            {
+                var photoPath = await PickPhotoAsync();
+                if (!string.IsNullOrEmpty(photoPath))
+                {
+                    ImagePath = photoPath;
+                }
+            });
+
+            AddNonCollectibleCommand = new Command(async () =>
+                {
+                Noncollectable nollectable = new Noncollectable()
+                {
+                    Name = Name,
+                    Description = Description,
+                    categoryId = SelectedCategory.Id,
+                    price = Price,
+                    Tradeable = Tradable,
+                    ImagePath = ImagePath,
+                    //userId = GetCurrentUserId()
+                };
+                    Items.Add(nollectable);
+                    App.MarketRepo.SaveEntity(nollectable);
+                    //pp.MarketRepo.SaveEntityWithChildren(nollectable);
+                    App.CategoRepo.UpdateEntityWithChildren(SelectedCategory);
+                    GetNonCollectables();
+            });
+        }
+        private void GetNonCollectables()
+        {
+            Items.Clear();  
+            List<Noncollectable> noni = App.MarketRepo.GetEntities();
+            foreach (Noncollectable nollectable in noni)
+            {
+                Items.Add(nollectable);
+            }
+        }
+        private void GetAllCategories()
+        {
+            Categories = App.CategoRepo.GetEntities();
+        }
+
+        public async Task<string> PickPhotoAsync()
+        {
+            try
+            {
+                var photo = await MediaPicker.PickPhotoAsync(new MediaPickerOptions
+                {
+                    Title = "Please pick a photo"
+                });
+
+                if (photo != null)
+                {
+                    var photoPath = await SaveFileAsync(photo);
+                    return photoPath; // SaveFileAsync is the same method used in the TakePhotoAsync
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"PickPhotoAsync error: {ex.Message}");
             }
 
-            // Take a photo or pick from gallery
-            FileResult photo = await MediaPicker.PickPhotoAsync() ?? await MediaPicker.CapturePhotoAsync();
-
-            if (photo != null)
-            {
-                // Open a stream for the selected image
-                var stream = await photo.OpenReadAsync();
-                return stream;
-            }
             return null;
         }
         public async Task<bool> UploadPhotoAsync(Stream photoStream)
@@ -44,17 +212,82 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
             var response = await httpClient.PostAsync("YourApiUrl/upload", content);
             return response.IsSuccessStatusCode;
         }
-        public async Task AddImageToCollectible(Noncollectable collectible, Stream imageStream)
+        public async Task<string> TakePhotoAsync()
         {
-            // Upload the photo or save locally
-            var imagePath = await UploadPhotoAsync(imageStream); // Or local saving method
+            var status = await Permissions.CheckStatusAsync<Permissions.Camera>();
+            if (status != PermissionStatus.Granted)
+            {
+                status = await Permissions.RequestAsync<Permissions.Camera>();
+            }
 
-            // Update collectible with the image path
-            collectible.ImagePath = imagePath;
+            // Make sure to re-check the permission status after the request
+            if (status == PermissionStatus.Granted)
+            {
+                // Permission has been granted, proceed with taking a picture
+                var photo = await MediaPicker.CapturePhotoAsync();
+                if (photo != null)
+                {
+                    try
+                    {
+                        // Save the photo to the app's local storage
+                        var photoPath = await SaveFileAsync(photo);
+                        ImagePath = photoPath;
+                        return photoPath;
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle exceptions
+                        Debug.WriteLine($"TakePhotoAsync error: {ex.Message}");
+                    }
 
-            // Update the collectible in your data store
+                }
+                else
+                {
+                    // Permission was denied or not granted, handle this case appropriately
+                    Debug.WriteLine("Camera permission was not granted.");
+                }
+                // Process the photo as needed
+            }  
+            return null;
         }
+        public async Task<string> SaveFileAsync2(FileResult photo)
+        {
+            var newFilePath = Path.Combine(FileSystem.AppDataDirectory, photo.FileName);
+            using (var stream = await photo.OpenReadAsync())
+            using (var newStream = File.OpenWrite(newFilePath))
+            {
+                await stream.CopyToAsync(newStream);
+            }
+            return newFilePath;
+        }
+        public async Task<string> SaveFileAsync(FileResult photo)
+        {
+            // Define the folder path where the photo will be saved
+            // This uses the app's local data directory
+            string folderPath = FileSystem.AppDataDirectory;
 
+            // Create a unique file name for the photo to avoid overwriting existing files
+            string fileName = $"photo_{DateTime.Now:yyyyMMdd_HHmmss}.jpg";
+            string filePath = Path.Combine(folderPath, fileName);
+            // Open a stream for the selected photo
+            using (var stream = await photo.OpenReadAsync())
+            {
+                // Create a new file and write the photo stream into it
+                using (var newFile = File.OpenWrite(filePath))
+                {
+                    await stream.CopyToAsync(newFile);
+                }
+            }
+
+            // Return the file path of the saved photo
+            return filePath;
+        }
+        
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
 
 

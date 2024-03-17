@@ -17,7 +17,7 @@ namespace CollectedPassionApp_A2D2.MVVM.Models
         public string role { get; set; }
 
         [OneToMany]
-        public List<Collectable>? collectables { get; set; }
+        public List<Noncollectable>? noncollectables { get; set; }
         
     }
 }

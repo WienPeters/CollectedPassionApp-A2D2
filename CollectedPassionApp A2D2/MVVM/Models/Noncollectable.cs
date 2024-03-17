@@ -16,6 +16,8 @@ namespace CollectedPassionApp_A2D2.MVVM.Models
 
         public string ImagePath { get; set; } // URL or local path
 
+        
+
         [ForeignKey(typeof(User))]
         public int? userId { get; set; }
     }

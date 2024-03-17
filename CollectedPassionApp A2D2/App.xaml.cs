@@ -11,14 +11,16 @@ namespace CollectedPassionApp_A2D2
         public static BaseRepository<Category>? CategoRepo { get; private set; } 
         //public static BaseRepository<Brand>? BrandRepo { get; private set; }
         public static BaseRepository<Collectable>? CollectionRepo { get; private set; }
-        public App(BaseRepository<User> userRepo,  BaseRepository<Collectable> collectrepo,BaseRepository<Category> categorepo)
-        //BaseRepository<Brand>? brandRepo)
+        public static BaseRepository<Noncollectable>? MarketRepo { get; private set; }
+        public App(BaseRepository<User> userRepo,  BaseRepository<Collectable> collectrepo,BaseRepository<Category> categorepo,
+        BaseRepository<Noncollectable>? nolleRepo)//BaseRepository<Brand>? brandRepo)
 
         {
             InitializeComponent();
             UserRepo = userRepo;
             CategoRepo = categorepo;
             CollectionRepo = collectrepo;
+            MarketRepo = nolleRepo;
 
 
             User Manager = new User() { username = "admin",  email = "ad@min", password = "ad", role = "manager" };

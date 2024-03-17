@@ -5,6 +5,7 @@ using CollectedPassionApp_A2D2.MVVM.Models;
 using Microsoft.Maui.ApplicationModel.Communication;
 using System.Collections.Generic;
 using Microsoft.Maui.Storage;
+using CollectedPassionApp_A2D2.MVVM.ViewModels;
 
 namespace CollectedPassionApp_A2D2;
 
@@ -68,6 +69,6 @@ namespace CollectedPassionApp_A2D2;
 
     private void BTNContinue_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new CollectorMainPage());
+        Navigation.PushAsync(new MarketplaceViwe());
     }
 }

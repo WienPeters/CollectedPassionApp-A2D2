@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:CollectedPassionApp_A2D2.MVVM.ViewModels"
              x:Class="CollectedPassionApp_A2D2.MVVM.Views.Collector.MarketplaceViwe"
              Title="MarketplaceViwe">
-    <VerticalStackLayout>
+    <ContentPage.BindingContext>
+        <vm:MarketViewModel/>
+    </ContentPage.BindingContext>
+    <StackLayout>
         <SearchBar x:Name="SEARchbar" Placeholder="Search wanted item" />
-        <Entry Placeholder="Collectible Name" Text="{Binding Name}"/>
-        <Entry Placeholder="Description" Text="{Binding Description}"/>
-        <Picker ItemsSource="{Binding Categories}"
-        ItemDisplayBinding="{Binding Catname}"
-        SelectedItem="{Binding SelectedCategory}"/>
-    </VerticalStackLayout>
+        <Image Source="{Binding ImagePath}" WidthRequest="350" HeightRequest="200" Aspect="AspectFit" />
+        <ListView x:Name="LISTVCollection" VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Always" 
+        SelectedItem="{Binding ItemSelected, Mode=TwoWay}" ItemsSource="{Binding Items}">
+            <ListView.ItemTemplate>
+                <DataTemplate >
+                    <TextCell Text="{Binding Name}" Detail="{Binding price}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
 </ContentPage>

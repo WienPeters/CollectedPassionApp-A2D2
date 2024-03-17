@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:CollectedPassionApp_A2D2.MVVM.ViewModels"
+             x:Class="CollectedPassionApp_A2D2.MVVM.Views.Collector.AddMarketObject"
+             Title="AddMarketObject">
+    <ContentPage.BindingContext>
+        <vm:MarketingcollectViewModel/>
+    </ContentPage.BindingContext>
+    <VerticalStackLayout>
+
+        <Button x:Name="BTNAddCat" Text="Nieuwe categorie toevoegen" Clicked="BTNAddCat_Clicked" />
+        <Picker Title="Kies een categorie" ItemsSource="{Binding Categories}"
+        ItemDisplayBinding="{Binding Catname}"
+        SelectedItem="{Binding SelectedCategory}"/>
+        <Entry Placeholder="Collectible Name" Text="{Binding Name}"/>
+        <Entry Placeholder="Description" Text="{Binding Description}"/>
+        <Label Text="Hoeveel wilt u ervoor krijgen?"/>
+        <Entry Placeholder="Price asked"  Text="{Binding Price}"/>
+        <Label Text="Item can be traded?" HorizontalOptions="Center"  />
+        <Switch HorizontalOptions="Center" x:Name="SwitchTrade"  />
+        <Button Text="Take Photo" Command="{Binding TakePhotoCommand}" />
+        <Button Text="Pick Photo"  Command="{Binding PickPhotoCommand}" />
+        <Image Source="{Binding ImagePath}" WidthRequest="200" HeightRequest="200"/>
+        <Button Text="Add MarketCollectible" Command="{Binding AddNonCollectibleCommand}" />
+        <Button x:Name="BTNGoToMarket" Text="View The Collectables Market" Clicked="BTNGoToMarket_Clicked"  />
+        
+
+
+
+    </VerticalStackLayout>
+    
+</ContentPage>

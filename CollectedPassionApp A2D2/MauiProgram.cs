@@ -19,7 +19,8 @@ namespace CollectedPassionApp_A2D2
             builder.Services.AddSingleton<BaseRepository<Category>>();
             builder.Services.AddSingleton<BaseRepository<Collectable>>();
             builder.Services.AddSingleton<BaseRepository<User>>();
-            
+            builder.Services.AddSingleton<BaseRepository<Noncollectable>>();
+
             //builder.Services.AddSingleton<BaseRepository<Brand>>();
 #if DEBUG
             builder.Logging.AddDebug();

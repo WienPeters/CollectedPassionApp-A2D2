@@ -73,6 +73,9 @@
 	  <MauiXaml Update="LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\Collector\AddMarketObject.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\Collector\CollectiblesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
