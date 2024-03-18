@@ -11,4 +11,9 @@ public partial class CollectorMainPage : ContentPage
     {
         Navigation.PushAsync(new CollectiblesPage());
     }
+
+    private void BTNMarketplaceview_Clicked_2(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new MarketplaceViwe());
+    }
 }

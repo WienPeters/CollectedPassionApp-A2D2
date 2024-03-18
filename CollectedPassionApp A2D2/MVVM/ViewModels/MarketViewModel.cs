@@ -6,12 +6,17 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace CollectedPassionApp_A2D2.MVVM.ViewModels
 {
     class MarketViewModel : INotifyPropertyChanged
     {
+        private readonly LocationService _locationService = new LocationService();
+        public string Address { get; private set; }
         
+      
+
         private string _imagePath;
         public string ImagePath
         {
@@ -40,11 +45,12 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 }
             }
         }
-        
+        public ICommand LoadAddressCommand { get; }
         public MarketViewModel()
         {
+
             GetNonCollectables();
-            
+            //LoadAddressCommand = new Command(async () => await LoadAddressAsync());
         }
         private void GetNonCollectables()
         {

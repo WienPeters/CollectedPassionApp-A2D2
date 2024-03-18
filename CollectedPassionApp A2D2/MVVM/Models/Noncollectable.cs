@@ -14,9 +14,11 @@ namespace CollectedPassionApp_A2D2.MVVM.Models
 
         public bool Tradeable { get; set; }
 
-        public string ImagePath { get; set; } // URL or local path
-
+        public string ImagePath { get; set; } 
         
+        public string locatie {  get; set; }
+
+        public string adres {  get; set; }
 
         [ForeignKey(typeof(User))]
         public int? userId { get; set; }

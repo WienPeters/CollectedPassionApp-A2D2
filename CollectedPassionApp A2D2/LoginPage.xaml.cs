@@ -58,17 +58,18 @@ namespace CollectedPassionApp_A2D2;
 
     private void BTNRegister_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new ManagerMainPage());
+        Navigation.PushAsync(new CreateUserPage());
     }
 
 
     private void showPasswordSwitch_Toggled(object sender, ToggledEventArgs e)
     {
-        ENTPassword.IsPassword = !e.Value;
+        Navigation.PushAsync(new ManagerMainPage());
+        //ENTPassword.IsPassword = !e.Value;
     }
 
     private void BTNContinue_Clicked(object sender, EventArgs e)
     {
-        Navigation.PushAsync(new MarketplaceViwe());
+        Navigation.PushAsync(new CollectorMainPage());
     }
 }

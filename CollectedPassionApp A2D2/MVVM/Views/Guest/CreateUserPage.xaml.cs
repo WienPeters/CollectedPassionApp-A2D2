@@ -1,5 +1,6 @@
 using Microsoft.Maui.ApplicationModel.Communication;
 using CollectedPassionApp_A2D2.MVVM.Models;
+
 namespace CollectedPassionApp_A2D2.MVVM.Views.Guest;
 
 public partial class CreateUserPage : ContentPage
@@ -14,7 +15,7 @@ public partial class CreateUserPage : ContentPage
 		string username = ENTUserName.Text;
         string email = ENTEmail.Text;
         string password = ENTPassword.Text;
-
+        
 
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
@@ -27,5 +28,20 @@ public partial class CreateUserPage : ContentPage
             await DisplayAlert("Melding", "Account is aangemaakt.", "Ga naar login pagina");
             await Navigation.PushAsync(new LoginPage());
         }
+    }
+
+    private async void BTNGetLocation_Clicked(object sender, EventArgs e)
+    {
+        LocationService los = new LocationService();
+        
+        string latestAddress = await los.GetLocationAddressAsync();
+        if (latestAddress != null)
+        {
+            LBLocatie.Text = latestAddress;
+        }
+        
+
+
+
     }
 }

@@ -10,4 +10,9 @@ public partial class MarketplaceViwe : ContentPage
         _viewModel = new MarketViewModel();
         BindingContext = _viewModel;
     }
+
+    private void BTNAddMarketitem_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new AddMarketObject());
+    }
 }

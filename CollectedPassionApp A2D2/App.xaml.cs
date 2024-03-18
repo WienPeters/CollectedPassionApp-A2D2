@@ -29,8 +29,8 @@ namespace CollectedPassionApp_A2D2
             {
                 UserRepo.SaveEntity(Manager);
             }
-
-            MainPage = new AppShell();
+            
+        MainPage = new AppShell();
         }
     }
 }

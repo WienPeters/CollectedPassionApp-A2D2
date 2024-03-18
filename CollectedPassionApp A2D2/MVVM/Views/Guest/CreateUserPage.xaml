@@ -20,7 +20,9 @@
 
         <Label Text="Wachtwoord"/>
             <Entry x:Name="ENTPassword" IsPassword="True"/>
-        
+
+        <Button x:Name="BTNGetLocation" Text="Adres ophalen" Clicked="BTNGetLocation_Clicked"/>
+        <Label x:Name="LBLocatie" Text=" "/>
 
 
         <Button Text="Aanmaken" x:Name="BTNRegister" Clicked="BTNRegister_Clicked"  />
