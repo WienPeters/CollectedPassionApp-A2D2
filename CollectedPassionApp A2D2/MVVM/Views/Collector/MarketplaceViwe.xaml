@@ -8,15 +8,18 @@
         <vm:MarketViewModel/>
     </ContentPage.BindingContext>
     <StackLayout>
-
-        <Button x:Name="BTNAddMarketitem" Text="Add a marketitem on page" Clicked="BTNAddMarketitem_Clicked"  />
+        <SearchBar x:Name="SRCHMarketplaceExternal" Placeholder="Search 4 way more..." SearchCommand="{Binding SearchCommand}"
+                  SearchButtonPressed="OnSearchButtonPressed"   SearchCommandParameter="{Binding Text, Source={RelativeSource Self}}" />
+        
         <Label x:Name="LBLSeller" Text="{Binding Username}" />
+        <Label x:Name="LBLCategory" Text="{Binding Catname}"/>
         <Image Source="{Binding ImagePath}" WidthRequest="350" HeightRequest="200" Aspect="AspectFit" />
+        <Button x:Name="BTNAddMarketitem" Text="Add marketitem for sale" Clicked="BTNAddMarketitem_Clicked"  />
         <ListView x:Name="LISTVCollection" VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Always" 
         SelectedItem="{Binding ItemSelected, Mode=TwoWay}" ItemsSource="{Binding FilteredItems}">
             <ListView.ItemTemplate>
                 <DataTemplate >
-                    <TextCell Text="{Binding Name}" Detail="{Binding OwnerName}"/>
+                    <TextCell Text="{Binding Name}" Detail="{Binding price}" />
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

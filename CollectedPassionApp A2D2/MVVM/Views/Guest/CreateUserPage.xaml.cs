@@ -41,8 +41,14 @@ public partial class CreateUserPage : ContentPage
         if (latestAddress != null)
         {
             LBLocatie.Text = latestAddress;
+            string[] parts = latestAddress.Split(',');
+            string hsnr = parts[0]; string strnm = parts[1]; string std = parts[4]; string prvnc = parts[5]; string lnd = parts[6]; string pstcd = parts[7];
+            string adres = (strnm + " " + hsnr + " " + pstcd + " " + std);
+            string stadregioland = (std + " " + prvnc + " " + lnd);
+            ENTAdres.Text = adres;
+            ENTNaamstad.Text = stadregioland;
         }
-        
+
 
 
 

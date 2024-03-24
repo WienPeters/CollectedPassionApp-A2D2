@@ -8,6 +8,23 @@
             Text="Welcome to Setting up your profile"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        
+        <Label Text="Edit Username"/>
+        <Entry x:Name="ENTUserName"/>
+
+        <Label Text="Edit Email"/>
+        <Entry x:Name="ENTEmail"/>
+
+
+        <Label Text="Edit Wachtwoord"/>
+        <Entry x:Name="ENTPassword" IsPassword="True"/>
+
+        <Button x:Name="BTNGetLocation" Text="Adres invullen" Clicked="BTNGetLocation_Clicked"      />
+        <Label x:Name="LBLocatie" Text=" "/>
+        <Label Text="adres"/>
+        <Entry x:Name="ENTAdres"/>
+        <Label Text="Stadsnaam"/>
+        <Entry x:Name="ENTNaamstad"/>
+        <Button x:Name="BTNSaveprofilechange" Text="Save the changes u made" Clicked="BTNSaveprofilechange_Clicked"   />
+
     </VerticalStackLayout>
 </ContentPage>

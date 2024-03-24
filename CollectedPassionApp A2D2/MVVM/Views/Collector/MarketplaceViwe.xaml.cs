@@ -18,9 +18,12 @@ public partial class MarketplaceViwe : ContentPage
         Navigation.PushAsync(new AddMarketObject());
     }
 
-    private void ItemSelected(object sender, EventArgs e)
+   
+    private async void OnSearchButtonPressed(object sender, EventArgs e)
     {
-        
-        //LBLOWner.Text = SessionManager.GetLoggedInUserIdAsync().ToString();
+        var query = Uri.EscapeDataString(SRCHMarketplaceExternal.Text);
+        var urlString = $"https://www.lastdodo.nl/nl/marketplace/search?q={query}";
+        await Browser.OpenAsync(urlString, BrowserLaunchMode.SystemPreferred);
     }
+   
 }

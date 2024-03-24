@@ -12,6 +12,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
     {
         private readonly LocationService _locationService = new LocationService();
         public string Address { get; private set; }
+        #region Dingens
         private List<Category> _categories;
         public List<Category> Categories
         {
@@ -134,8 +135,6 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 }
             }
         }
-        public ObservableCollection<Collectable4Sale> Items { get; set; } = new ObservableCollection<Collectable4Sale>();
-        public ObservableCollection<Collectable4Sale> FilteredItems { get; set; } = new ObservableCollection<Collectable4Sale>();
         private string selectedCategory;
         public string SelectedCategory
         {
@@ -164,8 +163,6 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 }
             }
         }
-        
-      
         private Collectable4Sale _selectedItem;
         public Collectable4Sale ItemSelected
         {
@@ -181,6 +178,15 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                     OnPropertyChanged(nameof(ItemSelected));
                 }
             }
+        }
+        #endregion
+        public ObservableCollection<Collectable4Sale> Items { get; set; } = new ObservableCollection<Collectable4Sale>();
+        public ObservableCollection<Collectable4Sale> FilteredItems { get; set; } = new ObservableCollection<Collectable4Sale>();
+        public ICommand SearchCommand => new Command<string>(PerformSearch);
+
+        private void PerformSearch(string query)
+        {
+            // Implement your search logic here
         }
         public ICommand LoadAddressCommand { get; }
         public MarketViewModel()

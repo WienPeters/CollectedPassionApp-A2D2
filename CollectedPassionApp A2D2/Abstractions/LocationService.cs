@@ -12,7 +12,7 @@ using CollectedPassionApp_A2D2.MVVM.Views.Guest;
 namespace CollectedPassionApp_A2D2.Abstractions
 {
     // Locatie met d.m.v. LocationIQAPI aldaniet APIKEY van coordinaten naar locatie omzetten.
-    public class LocationService
+    public class LocationService 
     {
         private readonly HttpClient _httpClient = new HttpClient();
         private const string LocationIQToken = "pk.e0f983ed8e2d0ee34f8d6ee6d434a96e";

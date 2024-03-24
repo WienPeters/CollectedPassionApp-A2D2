@@ -20,16 +20,17 @@
 
         <Label Text="Wachtwoord"/>
         <Entry x:Name="ENTPassword" IsPassword="True"/>
+        <Button Text="Aanmaken" x:Name="BTNRegister" Clicked="BTNRegister_Clicked"  />
 
-        <Button x:Name="BTNGetLocation" Text="Adres ophalen" Clicked="BTNGetLocation_Clicked"/>
-        <Label x:Name="LBLocatie" Text=" "/>
+        <Label Text="Adresgegevens kunnen evt later (automatisch) worden aangepast"/>
         <Label Text="adres"/>
         <Entry x:Name="ENTAdres"/>
         <Label Text="Stadsnaam"/>
         <Entry x:Name="ENTNaamstad"/>
+        <Label x:Name="LBLocatie" Text=" "/>
+        <Button x:Name="BTNGetLocation" Text="Adres ophalen" Clicked="BTNGetLocation_Clicked"/>
 
-
-        <Button Text="Aanmaken" x:Name="BTNRegister" Clicked="BTNRegister_Clicked"  />
+        
 
 
         </VerticalStackLayout>
