@@ -7,31 +7,30 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Maui.Devices.Sensors;
 using System.Globalization;
-using CollectedPassionApp_A2D2.MVVM.Models;
 using CollectedPassionApp_A2D2.MVVM.Views.Guest;
 
-namespace CollectedPassionApp_A2D2.MVVM.Models
+namespace CollectedPassionApp_A2D2.Abstractions
 {
     // Locatie met d.m.v. LocationIQAPI aldaniet APIKEY van coordinaten naar locatie omzetten.
     public class LocationService
     {
         private readonly HttpClient _httpClient = new HttpClient();
-        private const string LocationIQToken = "pk.e0f983ed8e2d0ee34f8d6ee6d434a96e"; 
+        private const string LocationIQToken = "pk.e0f983ed8e2d0ee34f8d6ee6d434a96e";
         private int _latestRequestID = 0;
         public async Task<string> GetLocationAddressAsync()
         {
             int thisRequestID = ++_latestRequestID;
             var location = await GetCurrentLocationAsync();
-            if (location != null && thisRequestID == _latestRequestID) 
+            if (location != null && thisRequestID == _latestRequestID)
             {
                 var address = await GetAddressFromCoordinatesAsync(location.Latitude, location.Longitude);
-                if (thisRequestID == _latestRequestID) 
+                if (thisRequestID == _latestRequestID)
                 {
                     return address;
                 }
             }
 
-            return null; 
+            return null;
         }
         public async Task<string> GetAddressFromCoordinatesAsync(double latitude, double longitude)
         {
@@ -53,7 +52,7 @@ namespace CollectedPassionApp_A2D2.MVVM.Models
             }
             catch (Exception ex)
             {
-                
+
                 return $"Error fetching address: {ex.Message}";
             }
         }
@@ -72,8 +71,8 @@ namespace CollectedPassionApp_A2D2.MVVM.Models
             }
             catch (Exception ex)
             {
-                
-                string ca = ($"Error obtaining location: {ex}");
+
+                string ca = $"Error obtaining location: {ex}";
                 return null;
             }
         }
@@ -84,7 +83,7 @@ namespace CollectedPassionApp_A2D2.MVVM.Models
             {
                 string latitude = location.Latitude.ToString(CultureInfo.InvariantCulture);
                 string longitude = location.Longitude.ToString(CultureInfo.InvariantCulture);
-                return (latitude+longitude);
+                return latitude + longitude;
             }
             else
             {
@@ -92,6 +91,6 @@ namespace CollectedPassionApp_A2D2.MVVM.Models
             }
         }
     }
-    
+
 }
 

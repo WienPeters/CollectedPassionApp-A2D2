@@ -10,9 +10,11 @@
     <VerticalStackLayout>
 
         <Button x:Name="BTNAddCat" Text="Nieuwe categorie toevoegen" Clicked="BTNAddCat_Clicked" />
+        
         <Picker Title="Kies een categorie" ItemsSource="{Binding Categories}"
         ItemDisplayBinding="{Binding Catname}"
         SelectedItem="{Binding SelectedCategory}"/>
+        
         <Entry Placeholder="Collectible Name" Text="{Binding Name}"/>
         <Entry Placeholder="Description" Text="{Binding Description}"/>
         <Label Text="Hoeveel wilt u ervoor krijgen?"/>
@@ -22,6 +24,7 @@
         <Button Text="Take Photo" Command="{Binding TakePhotoCommand}" />
         <Button Text="Pick Photo"  Command="{Binding PickPhotoCommand}" />
         <Image Source="{Binding ImagePath}" WidthRequest="200" HeightRequest="200"/>
+        
         <Button Text="Add MarketCollectible" Command="{Binding AddNonCollectibleCommand}" />
         <Button x:Name="BTNGoToMarket" Text="View The Collectables Market" Clicked="BTNGoToMarket_Clicked"  />
         

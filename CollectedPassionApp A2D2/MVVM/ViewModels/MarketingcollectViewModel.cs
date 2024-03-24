@@ -4,17 +4,19 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using CollectedPassionApp_A2D2.MVVM.Models;
+using CollectedPassionApp_A2D2.Repositories;
 using Microsoft.Maui.Media;
 
 namespace CollectedPassionApp_A2D2.MVVM.ViewModels
 {
     public class MarketingcollectViewModel : INotifyPropertyChanged
     {
-
+        
         #region variables
 
         private List<Category> _categories;
@@ -30,6 +32,36 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 }
             }
         }
+        private string _username;
+        public string Username
+        {
+            get => _username;
+            set
+            {
+                if (_username != value)
+                {
+                    Appuser userman = App.UserRepo.GetEntity(App.CurrentUserId);
+                    _username = userman.username = value;
+                    //_username = value;
+                    OnPropertyChanged(nameof(Username));
+                }
+            }
+        }
+        private Collectable _selecollectable;
+        public Collectable SelectedCollectable
+        {
+            get { return _selecollectable; }
+            set
+            {
+                if (_selecollectable != value)
+                {
+                    _selecollectable = value;
+                    OnPropertyChanged(nameof(SelectedCollectable));
+                    // Optionally, filter collectibles by selected category
+                }
+            }
+        }
+        
         private Category _selectedCategory;
         public Category SelectedCategory
         {
@@ -41,6 +73,19 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                     _selectedCategory = value;
                     OnPropertyChanged(nameof(SelectedCategory));
                     // Optionally, filter collectibles by selected category
+                }
+            }
+        }
+        private List<Collectable> _collectibles;
+        public List<Collectable> Collectables
+        {
+            get => Collectables;
+            set
+            {
+                if (_collectibles != value)
+                {
+                    _collectibles = value;
+                    OnPropertyChanged(nameof(Collectables));
                 }
             }
         }
@@ -110,8 +155,8 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 }
             }
         }
-        private List<Noncollectable> _noncollectibles;
-        public List<Noncollectable> Noncollectables
+        private List<Collectable4Sale> _noncollectibles;
+        public List<Collectable4Sale> Noncollectables
         {
             get => Noncollectables;
             set
@@ -123,21 +168,23 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 }
             }
         }
+        
 
         #endregion 
-        public ObservableCollection<Noncollectable> Items { get; set; } = new ObservableCollection<Noncollectable>();
+        public ObservableCollection<Collectable> Itemz { get; set; } = new ObservableCollection<Collectable>();
+        public ObservableCollection<Collectable4Sale> Items { get; set; } = new ObservableCollection<Collectable4Sale>();
+        
 
         public ICommand AddNonCollectibleCommand { get; private set; }
         public ICommand TakePhotoCommand { get; }
         public ICommand PickPhotoCommand { get; }
 
-        
 
 
         public MarketingcollectViewModel()
         {
-            GetAllCategories();
-            GetNonCollectables();
+            GetCategoryANonCollectables();
+            Getllectables();
             TakePhotoCommand = new Command(async () => await TakePhotoAsync());
             PickPhotoCommand = new Command(async () =>
             {
@@ -147,10 +194,10 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                     ImagePath = photoPath;
                 }
             });
-
+            
             AddNonCollectibleCommand = new Command(async () =>
                 {
-                Noncollectable nollectable = new Noncollectable()
+                    Collectable4Sale nollectable = new Collectable4Sale()
                 {
                     Name = Name,
                     Description = Description,
@@ -158,27 +205,37 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                     price = Price,
                     Tradeable = Tradable,
                     ImagePath = ImagePath,
-                    //userId = GetCurrentUserId()
+                    userId = App.CurrentUserId,
+                    
                 };
+                    //User user = brauchers.FirstOrDefault(selectedUser);
                     Items.Add(nollectable);
-                    App.MarketRepo.SaveEntity(nollectable);
-                    //pp.MarketRepo.SaveEntityWithChildren(nollectable);
+                   // user.collectales2sell.Add(nollectable);
+                 //   App.UserRepo.UpdateEntityWithChildren(user);
+                    App.Market.SaveEntity(nollectable);
                     App.CategoRepo.UpdateEntityWithChildren(SelectedCategory);
-                    GetNonCollectables();
+                    GetCategoryANonCollectables();
             });
         }
-        private void GetNonCollectables()
+        private void GetCategoryANonCollectables()
         {
-            Items.Clear();  
-            List<Noncollectable> noni = App.MarketRepo.GetEntities();
-            foreach (Noncollectable nollectable in noni)
+            Categories = App.CategoRepo.GetEntities();
+            Itemz.Clear();
+            List<Collectable> coleti = App.CollectionRepo.GetEntities();
+            foreach (Collectable collectable in coleti)
+            {
+                Itemz.Add(collectable);
+            }
+            
+        }
+        private void Getllectables()
+        {
+            Items.Clear();
+            List<Collectable4Sale> noni = App.Market.GetEntities();
+            foreach (Collectable4Sale nollectable in noni)
             {
                 Items.Add(nollectable);
             }
-        }
-        private void GetAllCategories()
-        {
-            Categories = App.CategoRepo.GetEntities();
         }
 
         public async Task<string> PickPhotoAsync()
@@ -282,14 +339,14 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
             // Return the file path of the saved photo
             return filePath;
         }
-        
-        protected virtual void OnPropertyChanged(string propertyName)
+
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+       
+
         public event PropertyChangedEventHandler PropertyChanged;
-
-
 
     }
 }

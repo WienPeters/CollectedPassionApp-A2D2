@@ -4,7 +4,10 @@
              x:Class="CollectedPassionApp_A2D2.MVVM.Views.Collector.CollectorMainPage"
              Title="CollectorMainPage">
     <VerticalStackLayout>
+        <Button x:Name="BTNProfileSetup" Text="Setup your profile" Clicked="BTNProfileSetup_Clicked"    />
+        <Button x:Name="BTNCategoryoverview" Text="Go to Category menu" Clicked="BTNCategoryoverview_Clicked"   />
         <Button x:Name="BTNManagecollectibles" Text="Manage Collectibles" Clicked="BTNManagecollectibles_Clicked"   />
-        <Button x:Name="BTNMarketplaceview" Text="Go to marketplaceview" Clicked="BTNMarketplaceview_Clicked_2"/>
+        <Button x:Name="BTNMarketplaceview" Text="Go to marketplace" Clicked="BTNMarketplaceview_Clicked_2"/>
+        
     </VerticalStackLayout>
 </ContentPage>

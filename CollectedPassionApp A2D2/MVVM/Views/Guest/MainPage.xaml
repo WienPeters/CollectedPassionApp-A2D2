@@ -4,14 +4,8 @@
              x:Class="CollectedPassionApp_A2D2.MainPage">
 
     <ScrollView>
-        <VerticalStackLayout Spacing="15" VerticalOptions="Center">
-            <Button x:Name="BTNCollectibles"
-            Text="Collectible toevoegen"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"
-            WidthRequest="300"
-          />
-        </VerticalStackLayout>
+        
+       
     </ScrollView>
 
 </ContentPage>

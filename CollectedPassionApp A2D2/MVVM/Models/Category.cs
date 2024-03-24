@@ -19,7 +19,7 @@ namespace CollectedPassionApp_A2D2.MVVM.Models
 
 
         [OneToMany(CascadeOperations = CascadeOperation.All)]
-        public List<Noncollectable>? Marketables { get; set; }
+        public List<Collectable4Sale>? Marketables { get; set; }
 
 
     }

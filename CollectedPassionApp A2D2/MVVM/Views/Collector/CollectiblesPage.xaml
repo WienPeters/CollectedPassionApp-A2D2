@@ -17,7 +17,7 @@
                     SelectedItem="{Binding SelectedCategory}"/>
             <Button Text="Add Collectible" Command="{Binding AddCollectibleCommand}" />
             <Button x:Name="BTNDELCollected" Text="Delete Selectedcollected" Command="{Binding DelSelectedCollected}"  />
-
+        <Button x:Name="BTNSellOnMarketplace" Text="Put item for sale on marketplace" Clicked="BTNSellOnMarketplace_Clicked"    />
 
 
         <ListView x:Name="LISTVCollection" VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Always" 

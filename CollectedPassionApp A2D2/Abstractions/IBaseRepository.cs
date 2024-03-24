@@ -10,7 +10,7 @@ namespace CollectedPassionApp_A2D2.Abstractions
     {
         //createudate
         void SaveEntity(T entity);
-       // void EmptyTable<T>() where T : new();
+        void EmptyTable<T>() where T : new();
         //read1ormore
         T? GetEntity(int id);
         List<T>? GetEntities();

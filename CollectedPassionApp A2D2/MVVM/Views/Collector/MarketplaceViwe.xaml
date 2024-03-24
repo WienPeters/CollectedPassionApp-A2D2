@@ -8,14 +8,15 @@
         <vm:MarketViewModel/>
     </ContentPage.BindingContext>
     <StackLayout>
+
         <Button x:Name="BTNAddMarketitem" Text="Add a marketitem on page" Clicked="BTNAddMarketitem_Clicked"  />
-        <SearchBar x:Name="SEARchbar" Placeholder="Search wanted item" />
+        <Label x:Name="LBLSeller" Text="{Binding Username}" />
         <Image Source="{Binding ImagePath}" WidthRequest="350" HeightRequest="200" Aspect="AspectFit" />
         <ListView x:Name="LISTVCollection" VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Always" 
-        SelectedItem="{Binding ItemSelected, Mode=TwoWay}" ItemsSource="{Binding Items}">
+        SelectedItem="{Binding ItemSelected, Mode=TwoWay}" ItemsSource="{Binding FilteredItems}">
             <ListView.ItemTemplate>
                 <DataTemplate >
-                    <TextCell Text="{Binding Name}" Detail="{Binding price}"/>
+                    <TextCell Text="{Binding Name}" Detail="{Binding OwnerName}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

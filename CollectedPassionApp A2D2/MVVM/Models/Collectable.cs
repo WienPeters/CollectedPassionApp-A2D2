@@ -12,9 +12,15 @@ namespace CollectedPassionApp_A2D2.MVVM.Models
     {
         public string Name { get; set; }
         public string Description { get; set; }
+        
 
         [ForeignKey(typeof(Category))]
         public int? categoryId { get; set; }
+
+        [ForeignKey(typeof(Appuser))]
+        public int userId { get ; set;}
+
+        
 
         
 

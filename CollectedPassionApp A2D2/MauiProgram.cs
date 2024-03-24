@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using CollectedPassionApp_A2D2.Repositories;
 using CollectedPassionApp_A2D2.MVVM.Models;
+using CollectedPassionApp_A2D2.Abstractions;
+using CollectedPassionApp_A2D2.MVVM.ViewModels;
 
 namespace CollectedPassionApp_A2D2
 {
@@ -16,12 +18,12 @@ namespace CollectedPassionApp_A2D2
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
             builder.Services.AddSingleton<BaseRepository<Category>>();
             builder.Services.AddSingleton<BaseRepository<Collectable>>();
-            builder.Services.AddSingleton<BaseRepository<User>>();
-            builder.Services.AddSingleton<BaseRepository<Noncollectable>>();
+            builder.Services.AddSingleton<BaseRepository<Appuser>>();
+            builder.Services.AddSingleton<BaseRepository<Collectable4Sale>>();
 
-            //builder.Services.AddSingleton<BaseRepository<Brand>>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

@@ -18,10 +18,7 @@ namespace CollectedPassionApp_A2D2;
         InitializeComponent();
 
     }
-    public void StoreCurrentUserId(int userId)
-    {
-        Preferences.Set("CurrentUserId", userId);
-    }
+   
 
     private void BTNForgorPassword_Clicked(object sender, EventArgs e)
     {
@@ -30,24 +27,24 @@ namespace CollectedPassionApp_A2D2;
 
     private void BTNLogin_Clicked(object sender, EventArgs e)
     {
-        string usrname = ENTusername.Text;
-        string pswrd = ENTPassword.Text;
+        string username = ENTusername.Text;
+        string password = ENTPassword.Text;
         
-        User user = App.UserRepo.GetEntities().FirstOrDefault(u => u.username == usrname && u.password == pswrd);
+        Appuser user = App.UserRepo.GetEntities().FirstOrDefault(u => u.username == username && u.password == password);
         if (user != null)
         {
+            
             App.CurrentUserId = user.Id;
-            User currentUser = App.UserRepo.GetEntity(user.Id);
             if (user.role == "manager")
             {
-                StoreCurrentUserId(currentUser.Id);
+            
                 Navigation.PushAsync(new ManagerMainPage());
             }
             
             else if (user.role == "collector")
             {
-                StoreCurrentUserId(currentUser.Id);
-                Navigation.PushAsync(new MainPage( ));
+              
+                Navigation.PushAsync(new CollectorMainPage( ));
             }
         }
         else
@@ -64,8 +61,8 @@ namespace CollectedPassionApp_A2D2;
 
     private void showPasswordSwitch_Toggled(object sender, ToggledEventArgs e)
     {
-        Navigation.PushAsync(new ManagerMainPage());
-        //ENTPassword.IsPassword = !e.Value;
+       
+        ENTPassword.IsPassword = !e.Value;
     }
 
     private void BTNContinue_Clicked(object sender, EventArgs e)

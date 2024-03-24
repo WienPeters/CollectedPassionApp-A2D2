@@ -141,7 +141,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                     Name = Name,
                     Description = Description,
                     categoryId = SelectedCategory.Id,
-                    //userId = GetCurrentUserId()
+                    
                 };
                 Items.Add(collectable);
                 App.CollectionRepo.SaveEntity(collectable);
@@ -166,11 +166,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 Items.Add(collectable);
             }
         }
-        public int GetCurrentUserId()
-        {
-            // Your logic to get the current user's ID
-            return App.CurrentUserId;
-        }
+        
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));

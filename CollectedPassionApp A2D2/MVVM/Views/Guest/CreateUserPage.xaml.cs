@@ -1,5 +1,6 @@
 using Microsoft.Maui.ApplicationModel.Communication;
 using CollectedPassionApp_A2D2.MVVM.Models;
+using CollectedPassionApp_A2D2.Abstractions;
 
 namespace CollectedPassionApp_A2D2.MVVM.Views.Guest;
 
@@ -15,6 +16,8 @@ public partial class CreateUserPage : ContentPage
 		string username = ENTUserName.Text;
         string email = ENTEmail.Text;
         string password = ENTPassword.Text;
+        string adres = ENTAdres.Text;
+        string stad = ENTNaamstad.Text;
         
 
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
@@ -23,7 +26,7 @@ public partial class CreateUserPage : ContentPage
         }
         else
         {
-            User collector = new User() { username = username, email = email, password = password, role = "collector" };
+            Appuser collector = new Appuser() { username = username, email = email, password = password,city = stad, adres = adres, role = "collector" };
             App.UserRepo.SaveEntity(collector);
             await DisplayAlert("Melding", "Account is aangemaakt.", "Ga naar login pagina");
             await Navigation.PushAsync(new LoginPage());

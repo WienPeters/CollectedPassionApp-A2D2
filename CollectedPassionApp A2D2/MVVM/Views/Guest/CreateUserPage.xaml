@@ -19,10 +19,14 @@
 
 
         <Label Text="Wachtwoord"/>
-            <Entry x:Name="ENTPassword" IsPassword="True"/>
+        <Entry x:Name="ENTPassword" IsPassword="True"/>
 
         <Button x:Name="BTNGetLocation" Text="Adres ophalen" Clicked="BTNGetLocation_Clicked"/>
         <Label x:Name="LBLocatie" Text=" "/>
+        <Label Text="adres"/>
+        <Entry x:Name="ENTAdres"/>
+        <Label Text="Stadsnaam"/>
+        <Entry x:Name="ENTNaamstad"/>
 
 
         <Button Text="Aanmaken" x:Name="BTNRegister" Clicked="BTNRegister_Clicked"  />

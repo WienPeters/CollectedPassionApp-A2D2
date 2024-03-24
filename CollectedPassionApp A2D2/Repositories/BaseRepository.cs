@@ -20,6 +20,7 @@ namespace CollectedPassionApp_A2D2.Repositories
             connection = new SQLiteConnection(
                Constants.DatabasePath,
                Constants.flags);
+            //EmptyTable<T>();
             connection.CreateTable<T>();
         }
         public void EmptyTable<T>() where T : new()

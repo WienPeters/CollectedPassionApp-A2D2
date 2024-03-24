@@ -1,4 +1,6 @@
+using CollectedPassionApp_A2D2.MVVM.Models;
 using CollectedPassionApp_A2D2.MVVM.ViewModels;
+
 namespace CollectedPassionApp_A2D2.MVVM.Views.Collector;
 
 public partial class MarketplaceViwe : ContentPage
@@ -14,5 +16,11 @@ public partial class MarketplaceViwe : ContentPage
     private void BTNAddMarketitem_Clicked(object sender, EventArgs e)
     {
         Navigation.PushAsync(new AddMarketObject());
+    }
+
+    private void ItemSelected(object sender, EventArgs e)
+    {
+        
+        //LBLOWner.Text = SessionManager.GetLoggedInUserIdAsync().ToString();
     }
 }

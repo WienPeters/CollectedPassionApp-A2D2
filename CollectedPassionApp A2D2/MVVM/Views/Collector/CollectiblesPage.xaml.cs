@@ -16,4 +16,8 @@ public partial class CollectiblesPage : ContentPage
         BindingContext = _viewModel;
     }
 
+    private void BTNSellOnMarketplace_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new AddMarketObject());
+    }
 }
