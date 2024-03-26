@@ -19,7 +19,7 @@
         <Image Source="{Binding ImagePath}" WidthRequest="350" HeightRequest="200" Aspect="AspectFit" />
         <Button x:Name="BTNAddMarketitem" Text="Add marketitem for sale" Clicked="BTNAddMarketitem_Clicked"  />
         <CollectionView  x:Name="LSVWLisf" VerticalOptions="FillAndExpand" ItemsSource="{Binding Items}"
-          BindingContext="{Binding ItemSelectedCommand, Mode=TwoWay}" SelectedItem="{Binding ItemSelected}"/>
+         SelectedItems="{Binding ItemSelectedCommand, Mode=TwoWay}" SelectedItem="{Binding ItemSelected,Mode=TwoWay}"/>
 
         <CollectionView/>
     </StackLayout>
