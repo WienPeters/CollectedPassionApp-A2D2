@@ -69,4 +69,6 @@ namespace CollectedPassionApp_A2D2;
     {
         Navigation.PushAsync(new CollectorMainPage());
     }
+
+    
 }

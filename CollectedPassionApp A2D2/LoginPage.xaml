@@ -28,7 +28,7 @@
                 <Switch x:Name="showPasswordSwitch" Toggled="showPasswordSwitch_Toggled"   OnColor="#9de390" ThumbColor="#2c730e"  />
             </StackLayout>
             
-            <Button x:Name="BTNForgorPassword" TextColor="MidnightBlue" BorderWidth="15" HorizontalOptions="Center" Margin="0,10,0,0" Text="Wachtwoord vergeten?" Clicked="BTNForgorPassword_Clicked"  />
+            <Button x:Name="BTNForgorPassword" TextColor="MidnightBlue" BorderWidth="15" HorizontalOptions="Center" Margin="0,10,0,0" Text="Wachtwoord vergeten?" Clicked="BTNForgorPassword_Clicked"   />
             <Label Text="Heb je nog geen account?" HorizontalOptions="Center"/>
             <Button x:Name="BTNRegister"  FontAttributes="Bold" BorderWidth="15"  Text="Maak een nieuw account aan" Clicked="BTNRegister_Clicked" />
 

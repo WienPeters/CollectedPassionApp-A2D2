@@ -8,7 +8,8 @@ public partial class MarketplaceViwe : ContentPage
     private readonly MarketViewModel _viewModel;
     public MarketplaceViwe()
 	{
-		InitializeComponent();
+        
+        InitializeComponent();
         _viewModel = new MarketViewModel();
         BindingContext = _viewModel;
     }

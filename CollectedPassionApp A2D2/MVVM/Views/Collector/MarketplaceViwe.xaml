@@ -5,23 +5,53 @@
              x:Class="CollectedPassionApp_A2D2.MVVM.Views.Collector.MarketplaceViwe"
              Shell.FlyoutBehavior="Disabled"
                 Shell.NavBarIsVisible="False"
-            BackgroundColor="Green">
+            >
     <ContentPage.BackgroundColor>
         <Color>#42a840</Color>
     </ContentPage.BackgroundColor>
     <ContentPage.BindingContext>
-        <vm:MarketViewModel  />
+        <vm:MarketViewModel    />
     </ContentPage.BindingContext>
     <StackLayout>
         <SearchBar x:Name="SRCHMarketplaceExternal" Placeholder="Search 4 way more..." SearchCommand="{Binding SearchCommand}"
                   SearchButtonPressed="OnSearchButtonPressed"   />
 
-        <Image Source="{Binding ImagePath}" WidthRequest="350" HeightRequest="200" Aspect="AspectFit" />
+        
         <Button x:Name="BTNAddMarketitem" Text="Add marketitem for sale" Clicked="BTNAddMarketitem_Clicked"  />
-        <CollectionView  x:Name="LSVWLisf" VerticalOptions="FillAndExpand" ItemsSource="{Binding Items}"
-         SelectedItems="{Binding ItemSelectedCommand, Mode=TwoWay}" SelectedItem="{Binding ItemSelected,Mode=TwoWay}"/>
+        <ListView  ItemsSource="{Binding Items}" SelectedItem="{Binding ItemSelected,Mode=TwoWay}" SelectionMode="Single">
+          
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid Padding="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                             </Grid.ColumnDefinitions>
+                             <Image Grid.RowSpan="2"
+                                Source="{Binding imagepath}"
+                                Aspect="AspectFill"
+                                HeightRequest="60"
+                                WidthRequest="60" />
+                            <Label Grid.Column="1"
+                                Text="{Binding Name}"
+                                FontAttributes="Bold" />
+                            <Label Grid.Row="0"
+                                Grid.Column="2"
+                                Text="{Binding price}"
+                                
+                                FontAttributes="Italic"
+                                VerticalOptions="End" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
 
-        <CollectionView/>
+        </ListView>
     </StackLayout>
    
 </ContentPage>

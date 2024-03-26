@@ -12,6 +12,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
 {
     class MarketViewModel : INotifyPropertyChanged
     {
+
         //Appuser uzer { get => uzer; set => uzer = App.UserRepo.GetEntity(ItemSelected.userId) ; }
         //private readonly LocationService _locationService = new LocationService();
         
@@ -40,24 +41,25 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 if (_username != value)
                 {
 
-                    Appuser uzer = App.UserRepo.GetEntity(ItemSelected.userId);
-                    _username = uzer.name;
-                    Username = uzer.username;
+                    //Appuser uzer = App.UserRepo.GetEntity(ItemSelected.userId);
+                    //_username = uzer.name;
+                    //Username = uzer.username;
                     OnPropertyChanged(Username);
                 }
             }
-        }     
-        private string Name {get => name ; set => name = value; }
-        public string name
+        }
+        private string _name ;
+        public string Name
         {
-            get => Name;
+            get => _name;
             set
             {
-                if (Name != value)
+                if (_name != value)
                 {
                     //Name = uzer.name = value;
-                    Name = value;
-                    OnPropertyChanged(nameof(name));
+                    _name = value;
+                    Name = ItemSelected.Name;
+                    OnPropertyChanged(nameof(Name));
                 }
             }
         }
@@ -71,6 +73,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 if (_description != value)
                 {
                     _description = value;
+                    Description = ItemSelected.Description;
                     OnPropertyChanged(nameof(Description));
                 }
             }
@@ -90,6 +93,20 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 }
             }
         }
+        private double _price;
+        public double price
+        {
+            get => _price;
+            set
+            {
+                if (_price != value)
+                {
+                    _price = value;
+                    price = ItemSelected.price.Value;
+                    OnPropertyChanged(nameof(price));
+                }
+            }
+        }
         private Collectable4Sale _selectedItem;
         public Collectable4Sale ItemSelected
         {
@@ -100,11 +117,12 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 {
                     
                     //Appuser use = App.UserRepo.GetEntity(_selectedItem.userId);
-                    _selectedItem = value;
-                    ImagePath = _selectedItem.imagepath;
-                    //name = ItemSelected.userId;
-
                     
+                    ImagePath = _selectedItem.imagepath;
+                    Name = _selectedItem.Name;
+                    Description = _selectedItem.Description;
+                    price = _selectedItem.price.Value;
+                    _selectedItem = value;
                     //Category categ = App.CategoRepo.GetEntityByName(_selectedCategoryid.Catname);
                     //int catid = categ.Id;
                     OnPropertyChanged(nameof(ItemSelected));
@@ -119,11 +137,11 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
         
         public ICommand SearchCommand => new Command<string>(PerformSearch);
        
-        public ICommand ItemSelectedCommand => new Command<Collectable4Sale>((selectedItem) =>
-        {
-            Debug.WriteLine($"Item tapped: {selectedItem.Name}");
-            Shell.Current.DisplayAlert("Details", $"Name: {selectedItem.Name}\nDescription: {selectedItem.Description}\nprice: {selectedItem.price}\ntradeable: {selectedItem.tradeable}", "OK");
-        });
+        //public ICommand ItemSelectedCommand => new Command<Collectable4Sale>((selectedItem) =>
+        //{
+        //    Debug.WriteLine($"Item tapped: {selectedItem.Name}");
+        //    Shell.Current.DisplayAlert("Details", $"Name: {selectedItem.Name}\nDescription: {selectedItem.Description}\nprice: {selectedItem.price}\ntradeable: {selectedItem.tradeable}", "OK");
+        //});
         // MessagingCenter.Send(this, "ShowDetailsPopup", selectedItem);
     
         private void PerformSearch(string query)
@@ -135,8 +153,8 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
         {
             GetNonCollectables();
             
-            
-            
+
+
         }
         private void GetAnyverzamelItem()
         {
@@ -159,6 +177,8 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 Items.Add(nollectable);
                // foreach(Category nolt in  Collectable4Sale in Items) { nolt.Marketables.Equals(nollectable.categoryId.Equals(App.Market.GetEntitiesWithChildren())); }
             }
+            //ListView listView = new ListView();
+            //listView.SetBinding(ItemsView.ItemsSourceProperty, "Items");
         }
         public void FillItems()
         {

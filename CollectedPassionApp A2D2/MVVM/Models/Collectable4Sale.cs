@@ -10,8 +10,8 @@ namespace CollectedPassionApp_A2D2.MVVM.Models
 {
     public class Collectable4Sale : TableData
     {
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public string? Name { get; set; }
+        public string? Description { get; set; }
 
         public double? price { get; set; }
 
