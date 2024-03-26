@@ -20,12 +20,13 @@
         <Label Text="Hoeveel wilt u ervoor krijgen?"/>
         <Entry Placeholder="Price asked"  Text="{Binding Price}"/>
         <Label Text="Item can be traded?" HorizontalOptions="Center"  />
-        <Switch HorizontalOptions="Center" x:Name="SwitchTrade"  />
+        <Switch HorizontalOptions="Center" x:Name="SWTSwitchTrade" BindingContext="{Binding Tradeable}"  />
         <Button Text="Take Photo" Command="{Binding TakePhotoCommand}" />
         <Button Text="Pick Photo"  Command="{Binding PickPhotoCommand}" />
         <Image Source="{Binding ImagePath}" WidthRequest="200" HeightRequest="200"/>
         
         <Button Text="Add MarketCollectible" Command="{Binding AddNonCollectibleCommand}" />
+        
         <Button x:Name="BTNGoToMarket" Text="View The Collectables Market" Clicked="BTNGoToMarket_Clicked"  />
         
 

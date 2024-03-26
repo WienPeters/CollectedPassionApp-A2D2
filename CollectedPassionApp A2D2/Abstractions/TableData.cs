@@ -9,7 +9,7 @@ namespace CollectedPassionApp_A2D2.Abstractions
 {
     public class TableData
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey, AutoIncrement, Indexed]
         public int Id { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CollectedPassionApp_A2D2.Abstractions;
 using CollectedPassionApp_A2D2.MVVM.Models;
 using CollectedPassionApp_A2D2.Repositories;
+using CollectedPassionApp_A2D2.MVVM.Views.Manager;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -10,92 +11,55 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
 {
     class MarketViewModel : INotifyPropertyChanged
     {
-        private readonly LocationService _locationService = new LocationService();
-        public string Address { get; private set; }
+        Appuser uzer { get => uzer; set => uzer = App.UserRepo.GetEntity(ItemSelected.userId) ; }
+        //private readonly LocationService _locationService = new LocationService();
+        
         #region Dingens
+
         private List<Category> _categories;
         public List<Category> Categories
         {
-            get { return _categories; }
+            get => _categories = App.CategoRepo.GetEntitiesWithChildren(); 
             set
             {
                 if (_categories != value)
                 {
+                    
                     _categories = value;
                     OnPropertyChanged(nameof(Categories));
                 }
             }
         }
-        private string _username;
+        private string _username ;
         public string Username
         {
-            get => _username;
-            set
+            get => _username  ;
+            private set
             {
                 if (_username != value)
                 {
-                    Appuser userman = App.UserRepo.GetEntity(App.CurrentUserId);
-                    _username = userman.username = value;
-                    //_username = value;
-                    OnPropertyChanged(nameof(Username));
+                    uzer = App.UserRepo.GetEntity(ItemSelected.userId);
+                    _username = uzer.name;
+                    Username = uzer.username;
+                    OnPropertyChanged(Username);
+                }
+            }
+        }     
+        private string Name {get => uzer.name ; set => uzer.name = value; }
+        public string name
+        {
+            get => Name;
+            set
+            {
+                if (Name != value)
+                {
+                    //Name = uzer.name = value;
+                    Name = value;
+                    OnPropertyChanged(nameof(name));
                 }
             }
         }
 
-        private Collectable _selecollectable;
-        public Collectable SelectedCollectable
-        {
-            get { return _selecollectable; }
-            set
-            {
-                if (_selecollectable != value)
-                {
-                    _selecollectable = value;
-                    OnPropertyChanged(nameof(SelectedCollectable));
-                    
-                    // Optionally, filter collectibles by selected category
-                }
-            }
-        }
-        private string _catname;
-        public string Catname
-        {
-            get => _catname;
-            set
-            {
-                if (_catname != value)
-                {
-                    _catname = value;
-                    OnPropertyChanged(nameof(Catname));
-                }
-            }
-        }
-        private string _name;
-        public string Name
-        {
-            get => _name;
-            set
-            {
-                if (_name != value)
-                {
-                    _name = value;
-                    OnPropertyChanged(nameof(Name));
-                }
-            }
-        }
-        private List<Collectable> _collectibles;
-        public List<Collectable> Collectables
-        {
-            get => Collectables;
-            set
-            {
-                if (_collectibles != value)
-                {
-                    _collectibles = value;
-                    OnPropertyChanged(nameof(Collectables));
-                }
-            }
-        }
         private string _description;
         public string Description
         {
@@ -109,72 +73,38 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 }
             }
         }
-        private Collectable4Sale _category;
-        public Collectable4Sale Category
-        {
-            get => _category;
-            set
-            {
-                if ( Category != value)
-                {
-                     Category = value;
-                }
-            }
-        }
-
+        
         private string _imagepath;
         public string ImagePath
         {
-            get => _imagepath;
+            get => _imagepath ;
             set
             {
-                if (value != _imagepath)
+                if (_imagepath != value)
                 {
                     _imagepath = value;
+                    ImagePath = ItemSelected.imagepath;
                     OnPropertyChanged(nameof(ImagePath));
-                }
-            }
-        }
-        private string selectedCategory;
-        public string SelectedCategory
-        {
-            get => selectedCategory;
-            set
-            {
-                if (selectedCategory != value)
-                {
-                    selectedCategory = value;
-                    OnPropertyChanged(nameof(SelectedCategory));
-                    FilterItems();
-                }
-            }
-        }
-        private int? _selectedCategoryId;
-        public int? SelectedCategoryId
-        {
-            get => _selectedCategoryId;
-            set
-            {
-                if (_selectedCategoryId != value)
-                {
-                    _selectedCategoryId = value;
-                    OnPropertyChanged(nameof(SelectedCategoryId));
-                    FilterItems();
                 }
             }
         }
         private Collectable4Sale _selectedItem;
         public Collectable4Sale ItemSelected
         {
-            get => _selectedItem;
+            get => _selectedItem ;
             set
             {
                 if (_selectedItem != value)
                 {
+                    
+                    //Appuser use = App.UserRepo.GetEntity(_selectedItem.userId);
                     _selectedItem = value;
-                    ImagePath = _selectedItem.ImagePath;
-                    Appuser Usern = App.UserRepo.GetEntity(_selectedItem.userId);
-                    Username = Usern.username;
+                    ImagePath = _selectedItem.imagepath;
+                    //name = ItemSelected.userId;
+
+                    
+                    //Category categ = App.CategoRepo.GetEntityByName(_selectedCategoryid.Catname);
+                    //int catid = categ.Id;
                     OnPropertyChanged(nameof(ItemSelected));
                 }
             }
@@ -182,6 +112,8 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
         #endregion
         public ObservableCollection<Collectable4Sale> Items { get; set; } = new ObservableCollection<Collectable4Sale>();
         public ObservableCollection<Collectable4Sale> FilteredItems { get; set; } = new ObservableCollection<Collectable4Sale>();
+        public ObservableCollection<Category> categories { get; set; } = new ObservableCollection<Category> { };
+        public List<Collectable> collectablesForSale {  get; set; } = new List<Collectable> { };
         public ICommand SearchCommand => new Command<string>(PerformSearch);
 
         private void PerformSearch(string query)
@@ -192,33 +124,38 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
         public MarketViewModel()
         {
             GetNonCollectables();
-            FilterItems();
-            //LoadAddressCommand = new Command(async () => await LoadAddressAsync());
+            
+            
+            
         }
+        private void GetAnyverzamelItem()
+        {
 
+            Appuser user = new Appuser();
+            user.Collecta4bles = App.Market.GetEntitiesWithChildren();
+            var allCollectables = user.Collecta4bles;
+            List<Collectable4Sale> collectablesForSale =  allCollectables.OfType<Collectable4Sale>().ToList();
+            var regularCollectables = allCollectables.Except(collectablesForSale).ToList();
+        }
         private void GetNonCollectables()
         {
-            Categories = App.CategoRepo.GetEntitiesWithChildren();
+
+
+            Items.Clear();
+            Categories = App.CategoRepo.GetEntities();
             List<Collectable4Sale> noni = App.Market.GetEntitiesWithChildren();
             foreach (Collectable4Sale nollectable in noni)
             {
-                FilteredItems.Add(nollectable);
+                Items.Add(nollectable);
+               // foreach(Category nolt in  Collectable4Sale in Items) { nolt.Marketables.Equals(nollectable.categoryId.Equals(App.Market.GetEntitiesWithChildren())); }
             }
         }
-        public void FilterItems()
+        public void FillItems()
         {
-            //FilteredItems.Clear();
-            var filtered = Items.Where(item =>
-                !SelectedCategoryId.HasValue || // No category selected
-                item.categoryId == SelectedCategoryId.Value); // Match found
-
-            foreach (var item in filtered)
-            {
-                FilteredItems.Add(item);
-            }
-
+            var categoriesWithCollectables = App.CategoRepo.GetAllWithKinders(recursive: true);
         }
         
+
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
         {

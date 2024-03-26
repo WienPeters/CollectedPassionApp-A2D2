@@ -2,51 +2,45 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CollectedPassionApp_A2D2.LoginPage"
-             Title="LoginPage">
-    <ScrollView>
+             Shell.FlyoutBehavior="Disabled"
+             Shell.NavBarIsVisible="False"
+              BackgroundColor="#42a840">
+    <ContentPage.BackgroundImageSource>
+        <UriImageSource Uri="Images/loginbackgr.jpg" />
+    </ContentPage.BackgroundImageSource>
+    
 
-        <VerticalStackLayout
-            
-        Spacing="25"
-        Padding="30,0"
-        VerticalOptions="Center">
 
-            <Label Text="inlognaam"/>
-            <Entry x:Name="ENTusername"/>
+    <ContentPage.Background>
+        <Color>#42a840</Color>
 
-            <Label Text="Wachtwoord"/>
-            <Entry x:Name="ENTPassword" IsPassword="True"/>
+    </ContentPage.Background>
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
 
+        <Image Source="logo.png" HeightRequest="100" WidthRequest="100" />
+
+        <StackLayout Padding="20" BackgroundColor="#a8d6a3" Opacity="0.8" Margin="0,20,0,0">
+            <Entry Text="x" x:Name="ENTusername" Placeholder="Username here" />
+            <Entry Text="x" x:Name="ENTPassword" IsPassword="True" Placeholder="Password here"  />
+            <Button x:Name="BTNLogin" Text="Login"  TextColor="MidnightBlue" Margin="0,10,0,0" Clicked="BTNLogin_Clicked" />
             <StackLayout Orientation="Horizontal" VerticalOptions="Start">
                 <Label Text="Toon wachtwoord" VerticalOptions="Center" />
-                <Switch x:Name="showPasswordSwitch" Toggled="showPasswordSwitch_Toggled"     />
+                <Switch x:Name="showPasswordSwitch" Toggled="showPasswordSwitch_Toggled"   OnColor="#9de390" ThumbColor="#2c730e"  />
             </StackLayout>
+            
+            <Button x:Name="BTNForgorPassword" TextColor="MidnightBlue" BorderWidth="15" HorizontalOptions="Center" Margin="0,10,0,0" Text="Wachtwoord vergeten?" Clicked="BTNForgorPassword_Clicked"  />
+            <Label Text="Heb je nog geen account?" HorizontalOptions="Center"/>
+            <Button x:Name="BTNRegister"  FontAttributes="Bold" BorderWidth="15"  Text="Maak een nieuw account aan" Clicked="BTNRegister_Clicked" />
 
-            <Button x:Name="BTNForgorPassword" 
-                    BackgroundColor="Transparent" 
-                    BorderColor="Transparent" 
-                    TextColor="{StaticResource Primary}" 
-                    FontAttributes="Bold"
-                    Text="Wachtwoord vergeten?"
-                    Clicked="BTNForgorPassword_Clicked"  
-                    />
+            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,20,0,0">
 
+                <Image Source="Images/qwitter.png" HeightRequest="40" WidthRequest="40" />
+            </StackLayout>
+        </StackLayout>
 
-
-            <Button x:Name="BTNLogin" Text="Log in" Clicked="BTNLogin_Clicked"/>
-
-            <Label Text="Heb je nog geen account?"/>
-            <Button x:Name="BTNRegister" 
-                    BackgroundColor="Transparent" 
-                    BorderColor="Transparent" 
-                    TextColor="{StaticResource Primary}" 
-                    FontAttributes="Bold"
-                    Text="Maak een nieuw account aan" 
-                    Clicked="BTNRegister_Clicked"
-                    />
-
-            <Button x:Name="BTNContinue" Text="Log niet in" Clicked="BTNContinue_Clicked"/>
-
-        </VerticalStackLayout>
-    </ScrollView>
+        <!-- <Button x:Name="BTNContinue" Text="Log niet in" Clicked="BTNContinue_Clicked"/> -->
+        <Label Text="© 2024 WP. All rights reserved." HorizontalOptions="Center" Margin="0,20,0,0" />
+    </StackLayout>
 </ContentPage>
+    

@@ -125,7 +125,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
         }
         #endregion 
         public ObservableCollection<Collectable> Items { get; set; } = new ObservableCollection<Collectable>();
-
+        public ObservableCollection<Collectable4Sale> Itemsz { get; set; } = new ObservableCollection<Collectable4Sale>();
         public ICommand AddCollectibleCommand { get; private set; }
         public ICommand AddCategorytoCollectibleCommand { get; private set; }
         public ICommand DelSelectedCollected { get; private set; }
@@ -159,11 +159,11 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
 
         private void GetAllCategoriesNCollectables()
         {
-            Categories = App.CategoRepo.GetEntities();
-            List<Collectable> coleti = App.CollectionRepo.GetEntities();
-            foreach (Collectable collectable in coleti)
+            Categories = App.CategoRepo.GetEntitiesWithChildren();
+            List<Collectable4Sale> coleti = App.Market.GetEntities();
+            foreach (Collectable4Sale collectable in coleti)
             {
-                Items.Add(collectable);
+                Itemsz.Add(collectable);
             }
         }
         

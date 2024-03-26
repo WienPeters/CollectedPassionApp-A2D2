@@ -13,12 +13,12 @@ public partial class CreateUserPage : ContentPage
 
     private async void BTNRegister_Clicked(object sender, EventArgs e)
     {
-		string username = ENTUserName.Text;
+        string name = ENTName.Text;
+        string username = ENTUserName.Text;
         string email = ENTEmail.Text;
         string password = ENTPassword.Text;
         string adres = ENTAdres.Text;
         string stad = ENTNaamstad.Text;
-        
 
         if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
@@ -26,7 +26,7 @@ public partial class CreateUserPage : ContentPage
         }
         else
         {
-            Appuser collector = new Appuser() { username = username, email = email, password = password,city = stad, adres = adres, role = "collector" };
+            Appuser collector = new Appuser() {name = name, username = username, email = email, password = password,city = stad, adres = adres, role = "collector" };
             App.UserRepo.SaveEntity(collector);
             await DisplayAlert("Melding", "Account is aangemaakt.", "Ga naar login pagina");
             await Navigation.PushAsync(new LoginPage());
@@ -35,8 +35,7 @@ public partial class CreateUserPage : ContentPage
 
     private async void BTNGetLocation_Clicked(object sender, EventArgs e)
     {
-        LocationService los = new LocationService();
-        
+        LocationService los = new LocationService();      
         string latestAddress = await los.GetLocationAddressAsync();
         if (latestAddress != null)
         {
@@ -48,9 +47,9 @@ public partial class CreateUserPage : ContentPage
             ENTAdres.Text = adres;
             ENTNaamstad.Text = stadregioland;
         }
-
-
-
-
+    }
+    private void BTNLoginpage_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new LoginPage());
     }
 }

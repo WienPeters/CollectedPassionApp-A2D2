@@ -39,11 +39,26 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 if (_selecteditem != value)
                 {
                     _selecteditem = value;
+                   
                     OnPropertyChanged(nameof(SelectedItem));
                 }
             }
         }
-        
+        private Category _selectedCategory;
+        public Category SelectedCategory
+        {
+            get => _selectedCategory;
+            set
+            {
+                if (_selectedCategory != value)
+                {
+                    _selectedCategory = SelectedCategory;
+
+                    OnPropertyChanged(nameof(SelectedCategory));
+                    // Optionally, filter collectibles by selected category
+                }
+            }
+        }
 
         public ICommand AddCategoryCommand { get; set; }
         public ICommand DeleteCategory {  get; set; }
@@ -74,11 +89,11 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
 
         private void GetAllCategories()
         {
-            // Assuming App.CategoRepo.GetEntitiesWithChildren() returns a List<Category>
-            var categories = App.CategoRepo.GetEntitiesWithChildren();
-            foreach (var category in categories)
+            Categories.Clear();
+            var category = App.CategoRepo.GetEntities();
+            foreach (Category cat in category)
             {
-                Categories.Add(category);
+                Categories.Add(cat);
             }
         }
 

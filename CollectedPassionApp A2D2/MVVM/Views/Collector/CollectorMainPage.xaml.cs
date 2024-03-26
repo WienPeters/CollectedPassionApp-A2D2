@@ -28,4 +28,9 @@ public partial class CollectorMainPage : ContentPage
     {
         Navigation.PushAsync(new ProfileSetupage());
     }
+
+    private void BTNEXIT_Clicked(object sender, EventArgs e)
+    {
+
+    }
 }

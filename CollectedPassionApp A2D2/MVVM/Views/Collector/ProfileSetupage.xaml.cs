@@ -1,9 +1,12 @@
 using CollectedPassionApp_A2D2.Abstractions;
 using CollectedPassionApp_A2D2.MVVM.Models;
+using CollectedPassionApp_A2D2.MVVM.ViewModels;
+
 namespace CollectedPassionApp_A2D2.MVVM.Views.Collector;
 
 public partial class ProfileSetupage : ContentPage
 {
+    
 	public ProfileSetupage()
 	{
 		InitializeComponent();
@@ -29,9 +32,11 @@ public partial class ProfileSetupage : ContentPage
 
     private void BTNSaveprofilechange_Clicked(object sender, EventArgs e)
     {
+        
         Appuser aos = new Appuser()
         {
             Id = App.CurrentUserId,
+            name = ENTName.Text,
             username = ENTUserName.Text,
             email = ENTEmail.Text,
             password = ENTPassword.Text,

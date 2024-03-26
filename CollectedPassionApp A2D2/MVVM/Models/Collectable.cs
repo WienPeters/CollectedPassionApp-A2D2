@@ -15,7 +15,7 @@ namespace CollectedPassionApp_A2D2.MVVM.Models
         
 
         [ForeignKey(typeof(Category))]
-        public int? categoryId { get; set; }
+        public int categoryId { get ; set ; }
 
         [ForeignKey(typeof(Appuser))]
         public int userId { get ; set;}

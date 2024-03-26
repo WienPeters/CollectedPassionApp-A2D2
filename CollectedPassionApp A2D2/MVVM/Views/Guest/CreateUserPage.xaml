@@ -1,38 +1,30 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CollectedPassionApp_A2D2.MVVM.Views.Guest.CreateUserPage"
-             Title="CreateUserPage">
-   
-        <VerticalStackLayout
-        Spacing="25"
-        Padding="30,0"
-        VerticalOptions="Center">
+             Shell.FlyoutBehavior="Disabled"
+                Shell.NavBarIsVisible="False"
+                BackgroundColor="#42a840">
 
-            
+    <ContentPage.Background>
+        <Color>#42a840</Color>
+    </ContentPage.Background>
 
-        <Label Text="Username"/>
-        <Entry x:Name="ENTUserName"/>
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
 
-        <Label Text="Email"/>
-        <Entry x:Name="ENTEmail"/>
+        <Image Source="logo.png" HeightRequest="100" WidthRequest="100" />
+        <StackLayout Padding="20" BackgroundColor="#42a840" Opacity="0.8" Margin="0,20,0,0">
+            <Entry x:Name="ENTName" Placeholder="Full Name" />
+            <Entry  x:Name="ENTUserName" Placeholder="Username" />
+            <Entry  x:Name="ENTEmail" Placeholder="Email" />
+            <Entry x:Name="ENTPassword" Placeholder="Password" IsPassword="True" />
+            <Entry Placeholder="Confirm Password" IsPassword="True" />
+            <Button Text="Register"  TextColor="MidnightBlue"  x:Name="BTNRegister" Clicked="BTNRegister_Clicked" Margin="0,10,0,0" />
+            <Entry Placeholder="Adres" x:Name="ENTAdres"/>
+            <Entry Placeholder="Stad" x:Name="ENTNaamstad"/>
+            <Label x:Name="LBLocatie" Text=" "/>
+            <Button x:Name="BTNGetLocation" Text="Adres ophalen" Clicked="BTNGetLocation_Clicked"/>
 
-
-        <Label Text="Wachtwoord"/>
-        <Entry x:Name="ENTPassword" IsPassword="True"/>
-        <Button Text="Aanmaken" x:Name="BTNRegister" Clicked="BTNRegister_Clicked"  />
-
-        <Label Text="Adresgegevens kunnen evt later (automatisch) worden aangepast"/>
-        <Label Text="adres"/>
-        <Entry x:Name="ENTAdres"/>
-        <Label Text="Stadsnaam"/>
-        <Entry x:Name="ENTNaamstad"/>
-        <Label x:Name="LBLocatie" Text=" "/>
-        <Button x:Name="BTNGetLocation" Text="Adres ophalen" Clicked="BTNGetLocation_Clicked"/>
-
-        
-
-
-        </VerticalStackLayout>
-    
+        </StackLayout>
+        <Button x:Name="BTNLoginpage" Text="Already have an account? Log in" TextColor="MidnightBlue" HorizontalOptions="Center" Margin="0,20,0,0" Clicked="BTNLoginpage_Clicked" />
+    </StackLayout>
 </ContentPage>

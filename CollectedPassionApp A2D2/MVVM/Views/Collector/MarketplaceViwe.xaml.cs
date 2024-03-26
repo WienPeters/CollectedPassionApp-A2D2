@@ -25,5 +25,29 @@ public partial class MarketplaceViwe : ContentPage
         var urlString = $"https://www.lastdodo.nl/nl/marketplace/search?q={query}";
         await Browser.OpenAsync(urlString, BrowserLaunchMode.SystemPreferred);
     }
-   
+
+    private void SWIpedetails_Clicked(object sender, EventArgs e)
+    {
+
+    }
+
+    private void DetailsSwipeItem_Clicked(object sender, EventArgs e)
+    {
+
+    }
+
+    private void LISTVCollection_ItemAppearing(object sender, ItemVisibilityEventArgs e)
+    {
+
+    }
+
+    private void Label_BindingContextChanged(object sender, EventArgs e)
+    {
+        
+    }
+
+    private void Label_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+
+    }
 }

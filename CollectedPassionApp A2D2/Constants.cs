@@ -9,12 +9,13 @@ namespace CollectedPassionApp_A2D2
 {
     public class Constants
     {
-        private const string DBFileName = "Collectert.db3";
+        private const string DBFileName = "Collect.db3";
 
         public const SQLiteOpenFlags flags =
             SQLiteOpenFlags.ReadWrite |
             SQLiteOpenFlags.Create |
             SQLiteOpenFlags.SharedCache;
+            
 
         public static string DatabasePath
         {

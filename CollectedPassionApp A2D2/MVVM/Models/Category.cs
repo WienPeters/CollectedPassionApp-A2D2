@@ -14,13 +14,10 @@ namespace CollectedPassionApp_A2D2.MVVM.Models
         public string Catname { get; set; }
         public string Description { get; set; }
 
-        [OneToMany(CascadeOperations =CascadeOperation.All)]
+        [OneToMany(CascadeOperations =CascadeOperation.CascadeInsert, ReadOnly = false)]
         public List<Collectable>? collectables { get; set; }
 
-
-        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        [OneToMany(CascadeOperations = CascadeOperation.CascadeInsert,ReadOnly =false)]
         public List<Collectable4Sale>? Marketables { get; set; }
-
-
     }
 }

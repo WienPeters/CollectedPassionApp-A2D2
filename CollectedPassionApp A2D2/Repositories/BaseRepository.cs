@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using CollectedPassionApp_A2D2.Abstractions;
 using CollectedPassionApp_A2D2.MVVM.Models;
+using Bogus;
 
 
 namespace CollectedPassionApp_A2D2.Repositories
@@ -71,7 +72,18 @@ namespace CollectedPassionApp_A2D2.Repositories
             }
             return null;
         }
-
+        public List<T> GetAllWithKinders(bool recursive = true)
+        {
+            try
+            {
+                return connection.GetAllWithChildren<T>().ToList();
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Error: {ex.Message}";
+            }
+            return null;
+        }
         public List<T> GetEntitiesWithChildren()
         {
             try
@@ -90,6 +102,18 @@ namespace CollectedPassionApp_A2D2.Repositories
             try
             {
                 return connection.Table<T>().FirstOrDefault(x => x.Id == id);
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = $"Error: {ex.Message}";
+            }
+            return null;
+        }
+        public T GetEntityByName(string name)
+        {
+            try
+            {
+                return connection.Table<T>().FirstOrDefault(x => x.Equals(name) );
             }
             catch (Exception ex)
             {
