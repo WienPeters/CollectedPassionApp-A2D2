@@ -66,8 +66,8 @@ namespace CollectedPassionApp_A2D2.Abstractions
             try
             {
                 var request = new GeolocationRequest(GeolocationAccuracy.Medium);
-                var location = await Geolocation.GetLocationAsync(request);
-                return location;
+                var locet = await Geolocation.GetLocationAsync(request);
+                return locet;
             }
             catch (Exception ex)
             {

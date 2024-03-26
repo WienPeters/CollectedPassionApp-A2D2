@@ -13,9 +13,18 @@
         <vm:MarketViewModel    />
     </ContentPage.BindingContext>
     <StackLayout>
-        
         <Image Source="{Binding ItemSelected.imagepath}" WidthRequest="350" HeightRequest="200" Aspect="Fill" />
-        <Label Text="{Binding SelectedCategory.Catname}" />
+        <StackLayout Orientation="Horizontal">
+            <Label HorizontalOptions="Start" Text=" Verkoper: " FontAttributes="Bold"/>
+            <Label HorizontalOptions="Start" Text="{Binding SelectedUser.name}"/>
+            <Label HorizontalOptions="Start" Text=" Category: " FontAttributes="Bold"/>
+            <Label HorizontalOptions="Start" Text="{Binding SelectedCategory.Catname}" />
+            <Label HorizontalOptions="Center" Text=" Price: " FontAttributes="Bold"/>
+            <Label HorizontalOptions="Center" Text="{Binding ItemSelected.price}"/>
+            <Label HorizontalOptions="End" Text=" Tradeable: " FontAttributes="Bold"/>
+            <Label HorizontalOptions="End" Text="{Binding ItemSelected.tradeable}"/>
+
+        </StackLayout>
         <Button x:Name="BTNAddMarketitem" Text="Add marketitem for sale" Clicked="BTNAddMarketitem_Clicked"  />
         <ListView  ItemsSource="{Binding Items}" SelectedItem="{Binding ItemSelected}" SelectionMode="Single">
           
@@ -33,10 +42,6 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />
-                                
                             </Grid.ColumnDefinitions>
                              <Image Grid.RowSpan="3"
                                 Source="{Binding imagepath}"
@@ -47,29 +52,13 @@
                                 Text="{Binding Name}"
                                 FontAttributes="Bold" />
                             <Label Grid.Row="0"
-                                Grid.Column="1"
-                                Text="{Binding price}"
-                                FontAttributes="Italic"
-                                VerticalOptions="End" />
-
-                            <Label Grid.Row="0"
                                 Grid.Column="2"
                                 Text="{Binding Description}"
                                 FontAttributes="Italic"
                                 VerticalOptions="End" />
                             <Label Grid.Column="3"
-                                   Text="{Binding tradeable}"
-                                   VerticalOptions="Start"/>
-                            <Label Grid.Column="4"
                                    Text="{Binding locatie}"
                                    VerticalOptions="End"/>
-                            <Label Grid.Column="5"
-                                    Text="{Binding categoryId}"
-                                    VerticalOptions="Start"/>
-                            <Label Grid.Column="6"
-                                    Text="{Binding userId}"
-                                    VerticalOptions="End"/>
-
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

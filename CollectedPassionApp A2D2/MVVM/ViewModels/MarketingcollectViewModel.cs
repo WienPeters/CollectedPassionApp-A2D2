@@ -1,18 +1,20 @@
 ﻿using CollectedPassionApp_A2D2.MVVM.Models;
 using CollectedPassionApp_A2D2.MVVM.Views.Collector;
+using CollectedPassionApp_A2D2.Abstractions;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Input;
+using Microsoft.Maui.Controls.PlatformConfiguration;
 
 namespace CollectedPassionApp_A2D2.MVVM.ViewModels
 {
     public class MarketingcollectViewModel : INotifyPropertyChanged
     {
-       // AddMarketObject amo = new AddMarketObject();
-        #region variables
 
+        #region variables
+       
         private List<Category> _categories;
         public List<Category> Categories
         {
@@ -150,6 +152,20 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 }
             }
         }
+        private string _location;
+        public string GPSLocation
+        {
+            get => _location;
+            set
+            {
+                if (value != _location)
+                {
+                    //_location =  getlocation();
+                    _location = value;
+                    OnPropertyChanged(nameof(GPSLocation));
+                }
+            }
+        }
         private string _imagepath;
         public string ImagePath
         {
@@ -180,12 +196,14 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
         private bool _tradeable;
         public bool Tradeable
         {
+
             get => _tradeable;
             set
             {
                 if (_tradeable != value)
                 {
                     _tradeable = value;
+                    
                     OnPropertyChanged(nameof(Tradeable));
                 }
             }
@@ -196,8 +214,10 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
         public ObservableCollection<Collectable> Itemz { get; set; } = new ObservableCollection<Collectable>();
         public ObservableCollection<Collectable4Sale> Items { get; set; } = new ObservableCollection<Collectable4Sale>();
         public List<Collectable4Sale> dingen { get; set; } = new List<Collectable4Sale> { };
+        
 
         public ICommand AddNonCollectibleCommand { get; private set; }
+        public ICommand ItsTradableCommand { get; set; }
         public ICommand TakePhotoCommand { get; }
         public ICommand PickPhotoCommand { get; }
 
@@ -217,7 +237,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                     ImagePath = photoPath;
                 }
             });
-
+            
             AddNonCollectibleCommand = new Command(async () =>
                 {
                     Collectable4Sale nollectable = new Collectable4Sale()
@@ -225,9 +245,9 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                         Name = Name,
                         Description = Description,
                         price = Price,
-                        tradeable = Tradeable,
+                        tradeable = Tradeable , 
                         imagepath = ImagePath,
-                        locatie = "somewhere",
+                        locatie = GPSLocation,
                         categoryId = this.SelectedCategory.Id,
                         userId = App.CurrentUserId
                     };
@@ -243,6 +263,14 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
 
                 });
         }
+        public void CreateObjectWithTrueAttribute()
+        {
+            // Create your object here or perform any other action
+            // For example:
+            Collectable4Sale newObj = new Collectable4Sale();
+            newObj.tradeable = true;
+            // Optionally, perform additional operations with the created object
+        }
         private void LoadCategory()
         {
             Categories = App.CategoRepo.GetEntitiesWithChildren();
@@ -251,6 +279,20 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
             {
                 dingen.Add(item);
             }
+        }
+        public async Task<string> getlocation()
+        {
+            LocationService los = new LocationService();
+            string latestAddress = await los.GetLocationAddressAsync();
+            if (latestAddress != null)
+            {
+                string[] parts = latestAddress.Split(',');
+                string hsnr = parts[0]; string strnm = parts[1]; string std = parts[4]; string prvnc = parts[5]; string lnd = parts[6]; string pstcd = parts[7];
+                string adres = (strnm + " " + hsnr + " " + pstcd + " " + std);
+                string stadregioland = (std + " " + prvnc + " " + lnd);
+                return  ( stadregioland);
+            }
+            else { return null; }
         }
         private void GetCategoryANonCollectables()
         {

@@ -107,4 +107,6 @@
 	  <Folder Include="Resources\Splash\" />
 	</ItemGroup>
 
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionCollectedPassionAppA2D2HideInfoBar="True" /></VisualStudio></ProjectExtensions>
+
 </Project>

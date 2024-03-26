@@ -24,10 +24,22 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
             set
             {
                 if (_categories != value)
-                {
-                    
+                { 
                     _categories = value;
                     OnPropertyChanged(nameof(Categories));
+                }
+            }
+        }
+        private List<Appuser> _appusers;
+        public List<Appuser> Appusers
+        {
+            get => _appusers = App.UserRepo.GetEntitiesWithChildren();
+            set
+            {
+                if (_appusers != value)
+                {
+                    _appusers = value;
+                    OnPropertyChanged(nameof(Appusers));
                 }
             }
         }
@@ -41,20 +53,14 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 OnPropertyChanged(nameof(SelectedCategory));
             }
         }
-        private string _username;
-        public string Username
+        private Appuser _selecteduser;
+        public Appuser SelectedUser
         {
-            get => _username;
-            private set
+            get => _selecteduser;
+            set
             {
-                if (_username != value)
-                {
-
-                    //Appuser uzer = App.UserRepo.GetEntity(ItemSelected.userId);
-                    //_username = uzer.name;
-                    //Username = uzer.username;
-                    OnPropertyChanged(Username);
-                }
+                _selecteduser = value;
+                OnPropertyChanged(nameof(SelectedUser));
             }
         }
         private string _name;
@@ -72,7 +78,6 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 }
             }
         }
-
         private string _description;
         public string Description
         {
@@ -128,7 +133,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 _selectedItem = value;
                 ImagePath = ItemSelected.imagepath;
                 SelectedCategory = Categories.FirstOrDefault(c => c.Id == _selectedItem.categoryId);
-                    //Description = _selectedItem.Description;
+                SelectedUser = Appusers.FirstOrDefault(c => c.Id == _selectedItem.userId);
                     //price = _selectedItem.price.Value;
 
                     //Category categ = App.CategoRepo.GetEntityByName(_selectedCategoryid.Catname);
@@ -147,12 +152,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
         
         public ICommand SearchCommand => new Command<string>(PerformSearch);
 
-        private void ItemSelectedHandler(Collectable4Sale selectedItem)
-        {
-            // Retrieve the category object based on selectedItem's categoryId
-            SelectedCategory = Categories.FirstOrDefault(c => c.Id == selectedItem.categoryId);
-            // Update other properties as needed
-        }
+        
 
 
         private void PerformSearch(string query)
