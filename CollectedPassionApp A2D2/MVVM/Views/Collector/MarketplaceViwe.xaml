@@ -10,24 +10,18 @@
         <Color>#42a840</Color>
     </ContentPage.BackgroundColor>
     <ContentPage.BindingContext>
-        <vm:MarketViewModel />
+        <vm:MarketViewModel  />
     </ContentPage.BindingContext>
     <StackLayout>
         <SearchBar x:Name="SRCHMarketplaceExternal" Placeholder="Search 4 way more..." SearchCommand="{Binding SearchCommand}"
                   SearchButtonPressed="OnSearchButtonPressed"   />
-        
+
         <Image Source="{Binding ImagePath}" WidthRequest="350" HeightRequest="200" Aspect="AspectFit" />
         <Button x:Name="BTNAddMarketitem" Text="Add marketitem for sale" Clicked="BTNAddMarketitem_Clicked"  />
-        <ListView x:Name="LISTVCollection" VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Always" 
-        SelectedItem="{Binding ItemSelected , Mode=TwoWay}"  ItemsSource="{Binding Items}">
-            
-            <ListView.ItemTemplate>
-                <DataTemplate >
-                    
-                    <TextCell Text="{Binding userId}" Detail="{Binding categoryId}" />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        
+        <CollectionView  x:Name="LSVWLisf" VerticalOptions="FillAndExpand" ItemsSource="{Binding Items}"
+          BindingContext="{Binding ItemSelectedCommand, Mode=TwoWay}" SelectedItem="{Binding ItemSelected}"/>
+
+        <CollectionView/>
     </StackLayout>
+   
 </ContentPage>

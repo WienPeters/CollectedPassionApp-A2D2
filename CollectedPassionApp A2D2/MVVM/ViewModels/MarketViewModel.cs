@@ -5,13 +5,14 @@ using CollectedPassionApp_A2D2.MVVM.Views.Manager;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
+using System.Diagnostics;
 
 
 namespace CollectedPassionApp_A2D2.MVVM.ViewModels
 {
     class MarketViewModel : INotifyPropertyChanged
     {
-        Appuser uzer { get => uzer; set => uzer = App.UserRepo.GetEntity(ItemSelected.userId) ; }
+        //Appuser uzer { get => uzer; set => uzer = App.UserRepo.GetEntity(ItemSelected.userId) ; }
         //private readonly LocationService _locationService = new LocationService();
         
         #region Dingens
@@ -38,14 +39,15 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
             {
                 if (_username != value)
                 {
-                    uzer = App.UserRepo.GetEntity(ItemSelected.userId);
+
+                    Appuser uzer = App.UserRepo.GetEntity(ItemSelected.userId);
                     _username = uzer.name;
                     Username = uzer.username;
                     OnPropertyChanged(Username);
                 }
             }
         }     
-        private string Name {get => uzer.name ; set => uzer.name = value; }
+        private string Name {get => name ; set => name = value; }
         public string name
         {
             get => Name;
@@ -114,8 +116,16 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
         public ObservableCollection<Collectable4Sale> FilteredItems { get; set; } = new ObservableCollection<Collectable4Sale>();
         public ObservableCollection<Category> categories { get; set; } = new ObservableCollection<Category> { };
         public List<Collectable> collectablesForSale {  get; set; } = new List<Collectable> { };
+        
         public ICommand SearchCommand => new Command<string>(PerformSearch);
-
+       
+        public ICommand ItemSelectedCommand => new Command<Collectable4Sale>((selectedItem) =>
+        {
+            Debug.WriteLine($"Item tapped: {selectedItem.Name}");
+            Shell.Current.DisplayAlert("Details", $"Name: {selectedItem.Name}\nDescription: {selectedItem.Description}\nprice: {selectedItem.price}\ntradeable: {selectedItem.tradeable}", "OK");
+        });
+        // MessagingCenter.Send(this, "ShowDetailsPopup", selectedItem);
+    
         private void PerformSearch(string query)
         {
             // Implement your search logic here
