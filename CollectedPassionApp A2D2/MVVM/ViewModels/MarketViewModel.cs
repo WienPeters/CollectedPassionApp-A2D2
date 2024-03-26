@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace CollectedPassionApp_A2D2.MVVM.ViewModels
@@ -13,8 +14,6 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
     class MarketViewModel : INotifyPropertyChanged
     {
 
-        //Appuser uzer { get => uzer; set => uzer = App.UserRepo.GetEntity(ItemSelected.userId) ; }
-        //private readonly LocationService _locationService = new LocationService();
         
         #region Dingens
 
@@ -32,10 +31,20 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 }
             }
         }
-        private string _username ;
+        private Category _selectedCategory;
+        public Category SelectedCategory
+        {
+            get => _selectedCategory;
+            set
+            {
+                _selectedCategory = value;
+                OnPropertyChanged(nameof(SelectedCategory));
+            }
+        }
+        private string _username;
         public string Username
         {
-            get => _username  ;
+            get => _username;
             private set
             {
                 if (_username != value)
@@ -48,7 +57,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 }
             }
         }
-        private string _name ;
+        private string _name;
         public string Name
         {
             get => _name;
@@ -58,7 +67,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 {
                     //Name = uzer.name = value;
                     _name = value;
-                    Name = ItemSelected.Name;
+                    //Name = ItemSelected.Name;
                     OnPropertyChanged(nameof(Name));
                 }
             }
@@ -73,22 +82,22 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 if (_description != value)
                 {
                     _description = value;
-                    Description = ItemSelected.Description;
+                    //Description = ItemSelected.Description;
                     OnPropertyChanged(nameof(Description));
                 }
             }
         }
-        
+
         private string _imagepath;
         public string ImagePath
         {
-            get => _imagepath ;
+            get => _imagepath;
             set
             {
                 if (_imagepath != value)
                 {
                     _imagepath = value;
-                    ImagePath = ItemSelected.imagepath;
+                    //ImagePath = ItemSelected.imagepath;
                     OnPropertyChanged(nameof(ImagePath));
                 }
             }
@@ -102,7 +111,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 if (_price != value)
                 {
                     _price = value;
-                    price = ItemSelected.price.Value;
+                    //price = ItemSelected.price.Value;
                     OnPropertyChanged(nameof(price));
                 }
             }
@@ -115,20 +124,21 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
             {
                 if (_selectedItem != value)
                 {
-                    
-                    //Appuser use = App.UserRepo.GetEntity(_selectedItem.userId);
-                    
-                    ImagePath = _selectedItem.imagepath;
-                    Name = _selectedItem.Name;
-                    Description = _selectedItem.Description;
-                    price = _selectedItem.price.Value;
-                    _selectedItem = value;
+
+                _selectedItem = value;
+                ImagePath = ItemSelected.imagepath;
+                SelectedCategory = Categories.FirstOrDefault(c => c.Id == _selectedItem.categoryId);
+                    //Description = _selectedItem.Description;
+                    //price = _selectedItem.price.Value;
+
                     //Category categ = App.CategoRepo.GetEntityByName(_selectedCategoryid.Catname);
                     //int catid = categ.Id;
                     OnPropertyChanged(nameof(ItemSelected));
                 }
+                else { _selectedItem = null; }
             }
         }
+        
         #endregion
         public ObservableCollection<Collectable4Sale> Items { get; set; } = new ObservableCollection<Collectable4Sale>();
         public ObservableCollection<Collectable4Sale> FilteredItems { get; set; } = new ObservableCollection<Collectable4Sale>();
@@ -136,14 +146,15 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
         public List<Collectable> collectablesForSale {  get; set; } = new List<Collectable> { };
         
         public ICommand SearchCommand => new Command<string>(PerformSearch);
-       
-        //public ICommand ItemSelectedCommand => new Command<Collectable4Sale>((selectedItem) =>
-        //{
-        //    Debug.WriteLine($"Item tapped: {selectedItem.Name}");
-        //    Shell.Current.DisplayAlert("Details", $"Name: {selectedItem.Name}\nDescription: {selectedItem.Description}\nprice: {selectedItem.price}\ntradeable: {selectedItem.tradeable}", "OK");
-        //});
-        // MessagingCenter.Send(this, "ShowDetailsPopup", selectedItem);
-    
+
+        private void ItemSelectedHandler(Collectable4Sale selectedItem)
+        {
+            // Retrieve the category object based on selectedItem's categoryId
+            SelectedCategory = Categories.FirstOrDefault(c => c.Id == selectedItem.categoryId);
+            // Update other properties as needed
+        }
+
+
         private void PerformSearch(string query)
         {
             // Implement your search logic here

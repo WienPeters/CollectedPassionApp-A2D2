@@ -2,6 +2,7 @@
 using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +24,7 @@ namespace CollectedPassionApp_A2D2.MVVM.Models
 
         [ForeignKey(typeof(Category))]
         public int categoryId { get; set; }
-
+        
         [ForeignKey(typeof(Appuser))]
         public int userId { get; set; }
         

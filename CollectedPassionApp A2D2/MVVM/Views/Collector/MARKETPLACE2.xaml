@@ -6,10 +6,11 @@
     
         
         <StackLayout>
-        
-            <Label x:Name="LBLCategory" Text="{Binding Catname }"/>
+        <SearchBar x:Name="SRCHMarketplaceExternal" Placeholder="Search 4 way more..." SearchCommand="{Binding SearchCommand}"
+          SearchButtonPressed="SRCHMarketplaceExternal_SearchButtonPressed"    />
+        <Label x:Name="LBLCategory" Text="{Binding Catname }"/>
             <Label x:Name="LBLSeller" Text="{Binding Username}" />
-        <Image Source="{Binding ImagePath}" WidthRequest="350" HeightRequest="200" Aspect="AspectFit" />
+        
         <Image Source="{Binding ImagePath}" WidthRequest="250" HeightRequest="150" Aspect="AspectFit" />
             <Button x:Name="BTNAddMarketitem" Text="Add marketitem for sale" />
             <CollectionView Grid.Row="1" x:Name="LISTVCollection" HorizontalOptions="Start" VerticalOptions="Center" VerticalScrollBarVisibility="Always" 

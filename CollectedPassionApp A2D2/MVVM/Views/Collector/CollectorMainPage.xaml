@@ -23,6 +23,8 @@
             <Button x:Name="BTNManagecollectibles" Text="Manage Collectibles" Clicked="BTNManagecollectibles_Clicked" ContentLayout="20,20" BorderWidth="10" Padding="25"   />
 
             <Button x:Name="BTNMarketplaceview" Text="Go to marketplace" Clicked="BTNMarketplaceview_Clicked_2" ContentLayout="20,20" BorderWidth="10" Padding="25"  />
+            
+            <Button x:Name="BTNCollecterplace" Text="Go to collection data" Clicked="BTNCollecterplace_Clicked" ContentLayout="20,20" BorderWidth="10" Padding="25"  />
 
             <Button x:Name="BTNEXIT" Text="Exit the app" Clicked="BTNEXIT_Clicked"  ContentLayout="20,20" BorderWidth="10" Padding="25"  />
         </StackLayout>

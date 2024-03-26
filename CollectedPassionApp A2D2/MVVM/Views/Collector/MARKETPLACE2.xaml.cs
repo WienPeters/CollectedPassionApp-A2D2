@@ -12,4 +12,11 @@ public partial class MARKETPLACE2 : ContentPage
         _viewModel = new MARKETPLACE2VIEWMODEL();
         BindingContext = _viewModel;
     }
+
+    private async void SRCHMarketplaceExternal_SearchButtonPressed(object sender, EventArgs e)
+    {
+        var query = Uri.EscapeDataString(SRCHMarketplaceExternal.Text);
+        var urlString = $"https://www.lastdodo.nl/nl/marketplace/search?q={query}";
+        await Browser.OpenAsync(urlString, BrowserLaunchMode.SystemPreferred);
+    }
 }

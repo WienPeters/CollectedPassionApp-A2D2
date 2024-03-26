@@ -22,8 +22,6 @@ public partial class MarketplaceViwe : ContentPage
    
     private async void OnSearchButtonPressed(object sender, EventArgs e)
     {
-        var query = Uri.EscapeDataString(SRCHMarketplaceExternal.Text);
-        var urlString = $"https://www.lastdodo.nl/nl/marketplace/search?q={query}";
-        await Browser.OpenAsync(urlString, BrowserLaunchMode.SystemPreferred);
+        
     }
 }

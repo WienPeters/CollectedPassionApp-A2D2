@@ -33,4 +33,9 @@ public partial class CollectorMainPage : ContentPage
     {
 
     }
+
+    private void BTNCollecterplace_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new MARKETPLACE2());
+    }
 }

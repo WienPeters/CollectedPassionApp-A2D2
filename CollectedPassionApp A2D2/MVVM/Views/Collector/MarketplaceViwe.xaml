@@ -13,12 +13,11 @@
         <vm:MarketViewModel    />
     </ContentPage.BindingContext>
     <StackLayout>
-        <SearchBar x:Name="SRCHMarketplaceExternal" Placeholder="Search 4 way more..." SearchCommand="{Binding SearchCommand}"
-                  SearchButtonPressed="OnSearchButtonPressed"   />
-
         
+        <Image Source="{Binding ItemSelected.imagepath}" WidthRequest="350" HeightRequest="200" Aspect="Fill" />
+        <Label Text="{Binding SelectedCategory.Catname}" />
         <Button x:Name="BTNAddMarketitem" Text="Add marketitem for sale" Clicked="BTNAddMarketitem_Clicked"  />
-        <ListView  ItemsSource="{Binding Items}" SelectedItem="{Binding ItemSelected,Mode=TwoWay}" SelectionMode="Single">
+        <ListView  ItemsSource="{Binding Items}" SelectedItem="{Binding ItemSelected}" SelectionMode="Single">
           
             <ListView.ItemTemplate>
                 <DataTemplate>
@@ -27,25 +26,50 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                              <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
-                             </Grid.ColumnDefinitions>
-                             <Image Grid.RowSpan="2"
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                
+                            </Grid.ColumnDefinitions>
+                             <Image Grid.RowSpan="3"
                                 Source="{Binding imagepath}"
-                                Aspect="AspectFill"
-                                HeightRequest="60"
-                                WidthRequest="60" />
+                                Aspect="Fill"
+                                HeightRequest="80"
+                                WidthRequest="80" />
                             <Label Grid.Column="1"
                                 Text="{Binding Name}"
                                 FontAttributes="Bold" />
                             <Label Grid.Row="0"
-                                Grid.Column="2"
+                                Grid.Column="1"
                                 Text="{Binding price}"
-                                
                                 FontAttributes="Italic"
                                 VerticalOptions="End" />
+
+                            <Label Grid.Row="0"
+                                Grid.Column="2"
+                                Text="{Binding Description}"
+                                FontAttributes="Italic"
+                                VerticalOptions="End" />
+                            <Label Grid.Column="3"
+                                   Text="{Binding tradeable}"
+                                   VerticalOptions="Start"/>
+                            <Label Grid.Column="4"
+                                   Text="{Binding locatie}"
+                                   VerticalOptions="End"/>
+                            <Label Grid.Column="5"
+                                    Text="{Binding categoryId}"
+                                    VerticalOptions="Start"/>
+                            <Label Grid.Column="6"
+                                    Text="{Binding userId}"
+                                    VerticalOptions="End"/>
+
                         </Grid>
                     </ViewCell>
                 </DataTemplate>
