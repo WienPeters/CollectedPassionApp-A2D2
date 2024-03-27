@@ -2,10 +2,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CollectedPassionApp_A2D2.MVVM.Views.Collector.MARKETPLACE2"
-             Title="MARKETPLACE2">
-    
-        
-        <StackLayout>
+             Shell.FlyoutBehavior="Disabled" Shell.NavBarIsVisible="False" BackgroundColor="#42a840" >
+    <StackLayout>
         <SearchBar x:Name="SRCHMarketplaceExternal" Placeholder="Search 4 way more..." SearchCommand="{Binding SearchCommand}"
           SearchButtonPressed="SRCHMarketplaceExternal_SearchButtonPressed"    />
         <Label x:Name="LBLCategory" Text="{Binding Catname }"/>

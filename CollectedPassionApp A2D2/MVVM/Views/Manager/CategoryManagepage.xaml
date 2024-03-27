@@ -4,7 +4,7 @@
              xmlns:vm="clr-namespace:CollectedPassionApp_A2D2.MVVM.ViewModels"
              x:Class="CollectedPassionApp_A2D2.MVVM.Views.Manager.CategoryManagepage"
              xmlns:local="clr-namespace:CollectedPassionApp_A2D2.MVVM.ViewModels"
-             x:DataType="vm:CategoryManageViewModel">
+             Shell.FlyoutBehavior="Disabled" Shell.NavBarIsVisible="False" BackgroundColor="#42a840" >
     <ContentPage.BindingContext>
         <vm:CategoryManageViewModel/>
     </ContentPage.BindingContext>
