@@ -18,7 +18,7 @@
         <ListView ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedItem}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Catname}" Detail="{Binding SelectedCategory}"/>
+                    <TextCell Text="{Binding Catname}" Detail="{Binding Description}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

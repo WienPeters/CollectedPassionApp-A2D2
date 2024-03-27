@@ -4,12 +4,10 @@
              xmlns:vm="clr-namespace:CollectedPassionApp_A2D2.MVVM.ViewModels"
              x:Class="CollectedPassionApp_A2D2.MVVM.Views.Collector.CategoryManagepage"
              xmlns:local="clr-namespace:CollectedPassionApp_A2D2.MVVM.ViewModels"
-             Shell.FlyoutBehavior="Disabled" Shell.NavBarIsVisible="False" BackgroundColor="GreenYellow">
+             Shell.FlyoutBehavior="Disabled" Shell.NavBarIsVisible="False" BackgroundColor="#42a840">
     <ContentPage.BindingContext>
         <vm:CategoryManageViewModel/>
     </ContentPage.BindingContext>
-
-
 
     <VerticalStackLayout>
 
@@ -21,7 +19,7 @@
         <ListView ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedItem}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Catname}" Detail="{Binding SelectedCategory}"/>
+                    <TextCell TextColor="MidnightBlue" Text="{Binding Catname}" Detail="{Binding Description}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

@@ -38,7 +38,7 @@ public partial class AddMarketObject : ContentPage
             string adres = (strnm + " " + hsnr + " " + pstcd + " " + std);
             string stadregioland = (std + " " + prvnc + " " + lnd);
             //ENTAdres.Text = adres;
-            ENTLocation.Text = stadregioland;
+            this.ENTLocation.Text = stadregioland;
         }
         //string loca = _viewModel.getlocation();
         // = loca.ToString();
