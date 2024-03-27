@@ -46,7 +46,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
         private Category _selecteditem;
         public Category SelectedItem
         {
-            get  => _selecteditem; 
+            get  { return _selecteditem; }
             set
             {
                 if (_selecteditem != value)
@@ -65,7 +65,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
             {
                 if (_selectedCategory != value)
                 {
-                    _selectedCategory = value;
+                    _selectedCategory = SelectedCategory;
 
                     OnPropertyChanged(nameof(SelectedCategory));
                     // Optionally, filter collectibles by selected category
