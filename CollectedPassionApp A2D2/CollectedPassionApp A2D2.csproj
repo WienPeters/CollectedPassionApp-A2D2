@@ -77,6 +77,9 @@
 	  <MauiXaml Update="MVVM\Views\Collector\AddMarketObject.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\Collector\CategoryManagepage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\Collector\CollectiblesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -105,6 +108,12 @@
 
 	<ItemGroup>
 	  <Folder Include="Resources\Splash\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="MVVM\Views\Collector\CategoryManagepage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionCollectedPassionAppA2D2HideInfoBar="True" /></VisualStudio></ProjectExtensions>

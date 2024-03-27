@@ -30,6 +30,19 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 }
             }
         }
+        private string _description;
+        public string Description
+        {
+            get => _description;
+            set
+            {
+                if (_description != value)
+                {
+                    _description = value;
+                    OnPropertyChanged(nameof(Description));
+                }
+            }
+        }
         private Category _selecteditem;
         public Category SelectedItem
         {
@@ -62,22 +75,21 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
 
         public ICommand AddCategoryCommand { get; set; }
         public ICommand DeleteCategory {  get; set; }
-
+        
         public CategoryManageViewModel()
         {
             GetAllCategories();
             Category cat = SelectedItem;
-            AddCategoryCommand = new Command<string>(AddCategory);
+            //AddCategoryCommand = new Command(
             DeleteCategory = new Command(item => OnDelete(SelectedItem));
         }
 
-        private void AddCategory(string categoryName)
+        private void AddCategory(string categoryName, string cateforyDesc)
         {
-            if (!string.IsNullOrWhiteSpace(categoryName))
+            if (!string.IsNullOrWhiteSpace(categoryName) | !string.IsNullOrWhiteSpace(cateforyDesc))
             {
-                AddCategoryCommand = new Command<string>(AddCategory);
-                App.CategoRepo.SaveEntity(new Category { Catname = categoryName });
-                Categories.Add(new Category { Catname = categoryName });
+                App.CategoRepo.SaveEntity(new Category { Catname = categoryName, Description = cateforyDesc });
+                Categories.Add(new Category { Catname = categoryName, Description = cateforyDesc });
                 OnPropertyChanged(nameof(Categories));
             }
         }

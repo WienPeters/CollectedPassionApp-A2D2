@@ -3,18 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:CollectedPassionApp_A2D2.MVVM.ViewModels"
              x:Class="CollectedPassionApp_A2D2.MVVM.Views.Collector.CollectiblesPage"
-             x:DataType="vm:CollectiblesViewModel">
-    
-        <ContentPage.BindingContext>
+             xmlns:local="clr-namespace:CollectedPassionApp_A2D2.MVVM.ViewModels"
+            Shell.FlyoutBehavior="Disabled" Shell.NavBarIsVisible="False" BackgroundColor="#42a840">
+    <ContentPage.BindingContext>
             <vm:CollectiblesViewModel/>
         </ContentPage.BindingContext>
     
         <VerticalStackLayout Padding="30">
+            <Button x:Name="BTNCategorypage" Text="Add new Category" Clicked="BTNCategorypage_Clicked"  />
+            <Picker ItemsSource="{Binding Categories}"
+                ItemDisplayBinding="{Binding Catname}"
+                SelectedItem="{Binding SelectedCategory}"/>
             <Entry Placeholder="Collectible Name" Text="{Binding Name}"/>
             <Entry Placeholder="Description" Text="{Binding Description}"/>
-            <Picker ItemsSource="{Binding Categories}"
-                    ItemDisplayBinding="{Binding Catname}"
-                    SelectedItem="{Binding SelectedCategory}"/>
+            
             <Button Text="Add Collectible" Command="{Binding AddCollectibleCommand}" />
             <Button x:Name="BTNDELCollected" Text="Delete Selectedcollected" Command="{Binding DelSelectedCollected}"  />
         <Button x:Name="BTNSellOnMarketplace" Text="Put item for sale on marketplace" Clicked="BTNSellOnMarketplace_Clicked"    />

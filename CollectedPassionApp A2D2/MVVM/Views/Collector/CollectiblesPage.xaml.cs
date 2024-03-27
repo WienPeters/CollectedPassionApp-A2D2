@@ -20,4 +20,9 @@ public partial class CollectiblesPage : ContentPage
     {
         Navigation.PushAsync(new AddMarketObject());
     }
+
+    private void BTNCategorypage_Clicked(object sender, EventArgs e)
+    {
+        Navigation.PushAsync(new CategoryManagepage());
+    }
 }

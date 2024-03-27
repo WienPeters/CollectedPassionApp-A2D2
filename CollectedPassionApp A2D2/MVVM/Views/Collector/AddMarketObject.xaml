@@ -3,22 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vm="clr-namespace:CollectedPassionApp_A2D2.MVVM.ViewModels"
              x:Class="CollectedPassionApp_A2D2.MVVM.Views.Collector.AddMarketObject"
-             Shell.FlyoutBehavior="Disabled"
-            Shell.NavBarIsVisible="False">
+             Shell.FlyoutBehavior="Disabled" Shell.NavBarIsVisible="False" BackgroundColor="#42a840">
     <ContentPage.BindingContext>
         <vm:MarketingcollectViewModel/>
     </ContentPage.BindingContext>
     <VerticalStackLayout>
 
         <Button x:Name="BTNAddCat" Text="Nieuwe categorie toevoegen" Clicked="BTNAddCat_Clicked" />
-
         <Picker Title="Kies een categorie" ItemsSource="{Binding Categories}"
         ItemDisplayBinding="{Binding Catname}"
         SelectedItem="{Binding SelectedCategory}"/>
 
         <Entry Placeholder="Collectible Name" Text="{Binding Name}"/>
         <Entry Placeholder="Description" Text="{Binding Description}"/>
-        <Entry x:Name="ENTLocation" Placeholder="Location of item" Text="{Binding GPSLocation}"/>
+        <Entry x:Name="ENTLocation" Placeholder="Where's the item being sold" Text="{Binding GPSLocation}"/>
         <Button x:Name="BTNLocation" Text="Click here to add your location" Clicked="BTNLocation_Clicked"   />
         <Entry Placeholder="Price of item?" Text="{Binding Price}"/>
         <Label Text="Item can be traded?" HorizontalOptions="Center" />
