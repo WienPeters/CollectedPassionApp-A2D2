@@ -46,6 +46,6 @@ public partial class AddMarketObject : ContentPage
 
     private void BTNYour4Saleitems_Clicked(object sender, EventArgs e)
     {
-        //Navigation.PushAsync(new MyMarketplaceView());
+        Navigation.PushAsync(new MyMarketplaceView());
     }
 }

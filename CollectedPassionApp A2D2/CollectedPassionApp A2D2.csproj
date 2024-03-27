@@ -92,6 +92,9 @@
 	  <MauiXaml Update="MVVM\Views\Collector\MarketplaceViwe.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="MVVM\Views\Collector\MyMarketplaceView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="MVVM\Views\Collector\ProfileSetupage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
