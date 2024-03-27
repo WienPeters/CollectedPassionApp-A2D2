@@ -1,11 +1,11 @@
-using CollectedPassionApp_A2D2.MVVM.Views.Guest;
-using CollectedPassionApp_A2D2.MVVM.Views.Manager;
-using CollectedPassionApp_A2D2.MVVM.Views.Collector;
-using CollectedPassionApp_A2D2.MVVM.Models;
 using Microsoft.Maui.ApplicationModel.Communication;
 using System.Collections.Generic;
 using Microsoft.Maui.Storage;
 using CollectedPassionApp_A2D2.MVVM.ViewModels;
+using CollectedPassionApp_A2D2.MVVM.Views.Guest;
+using CollectedPassionApp_A2D2.MVVM.Views.Manager;
+using CollectedPassionApp_A2D2.MVVM.Views.Collector;
+using CollectedPassionApp_A2D2.MVVM.Models;
 
 namespace CollectedPassionApp_A2D2;
 

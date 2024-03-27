@@ -18,10 +18,10 @@
         <Button  Text="Add Category"  Command="{Binding AddCategoryCommand }"/>
         <Button x:Name="BNTDeleteCategory" Text="Delete category" Command="{Binding DeleteCategory}"/>
         <Label x:Name="LBLCATID" Text="{Binding SelectedCategory}"/>
-        <ListView ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedItem}">
+        <ListView ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedItem}" SelectionMode="Single">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Catname}" Detail="{Binding SelectedCategory}"/>
+                    <TextCell Text="{Binding Catname}" Detail="{Binding Description }"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

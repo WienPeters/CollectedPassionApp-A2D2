@@ -11,9 +11,12 @@
         
         <Button x:Name="BTNAddMarketitem" Text="Put a Marketitem up for sale" Clicked="BTNAddMarketitem_Clicked"  />
         <ListView  ItemsSource="{Binding MItems}" SelectedItem="{Binding ItemSelected}" SelectionMode="Single">
-          
-           
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}" Detail="{Binding SelectedItem.Description }"/>
+                </DataTemplate>
 
+            </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
    
