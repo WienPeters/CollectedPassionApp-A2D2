@@ -43,4 +43,9 @@ public partial class AddMarketObject : ContentPage
         //string loca = _viewModel.getlocation();
         // = loca.ToString();
     }
+
+    private void BTNYour4Saleitems_Clicked(object sender, EventArgs e)
+    {
+        //Navigation.PushAsync(new MyMarketplaceView());
+    }
 }

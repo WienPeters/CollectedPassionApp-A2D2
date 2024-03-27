@@ -20,7 +20,7 @@
             <Label HorizontalOptions="End" Text="{Binding ItemSelected.tradeable}"/>
 
         </StackLayout>
-        <Button x:Name="BTNAddMarketitem" Text="Add marketitem for sale" Clicked="BTNAddMarketitem_Clicked"  />
+        <Button x:Name="BTNAddMarketitem" Text="Put a Marketitem up for sale" Clicked="BTNAddMarketitem_Clicked"  />
         <ListView  ItemsSource="{Binding Items}" SelectedItem="{Binding ItemSelected}" SelectionMode="Single">
           
             <ListView.ItemTemplate>

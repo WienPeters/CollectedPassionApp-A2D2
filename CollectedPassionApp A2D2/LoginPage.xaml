@@ -20,8 +20,8 @@
         <Image Source="logo.png" HeightRequest="100" WidthRequest="100" />
 
         <StackLayout Padding="20" BackgroundColor="#a8d6a3" Opacity="0.8" Margin="0,20,0,0">
-            <Entry Text="x" x:Name="ENTusername" Placeholder="Username here" />
-            <Entry Text="x" x:Name="ENTPassword" IsPassword="True" Placeholder="Password here"  />
+            <Entry Text="" x:Name="ENTusername" Placeholder="Username here" />
+            <Entry Text="" x:Name="ENTPassword" IsPassword="True" Placeholder="Password here"  />
             <Button x:Name="BTNLogin" Text="Login"  TextColor="MidnightBlue" Margin="0,10,0,0" Clicked="BTNLogin_Clicked" />
             <StackLayout Orientation="Horizontal" VerticalOptions="Start">
                 <Label Text="Toon wachtwoord" VerticalOptions="Center" />

@@ -208,15 +208,31 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 }
             }
         }
-        
-
-        #endregion 
+        private Collectable4Sale _selectedItem;
+        public Collectable4Sale ItemSelected
+        {
+            get => _selectedItem;
+            set
+            {
+                if (_selectedItem != value)
+                {
+                    _selectedItem = value;
+                    //ImagePath = ItemSelected.imagepath;
+                    //SelectedCategory = Categories.FirstOrDefault(c => c.Id == _selectedItem.categoryId);
+                    //SelectedUser = Appusers.FirstOrDefault(c => c.Id == _selectedItem.userId);
+                    //price = _selectedItem.price.Value;
+                    OnPropertyChanged(nameof(ItemSelected));
+                }
+            }
+        }
+        #endregion
         public ObservableCollection<Collectable> Itemz { get; set; } = new ObservableCollection<Collectable>();
         public ObservableCollection<Collectable4Sale> Items { get; set; } = new ObservableCollection<Collectable4Sale>();
         public List<Collectable4Sale> dingen { get; set; } = new List<Collectable4Sale> { };
         
 
         public ICommand AddNonCollectibleCommand { get; private set; }
+        public ICommand DeleteCollectible4Sale{ get; set; }
         public ICommand ItsTradableCommand { get; set; }
         public ICommand TakePhotoCommand { get; }
         public ICommand PickPhotoCommand { get; }
@@ -237,7 +253,8 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                     ImagePath = photoPath;
                 }
             });
-            
+               
+            DeleteCollectible4Sale = new Command(item => OnDelete(ItemSelected));
             AddNonCollectibleCommand = new Command(async () =>
                 {
                     Collectable4Sale nollectable = new Collectable4Sale()
@@ -271,6 +288,12 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
             newObj.tradeable = true;
             // Optionally, perform additional operations with the created object
         }
+        private void OnDelete(Collectable4Sale c4s)
+        {
+            App.Market.DeleteEntityWithChildren(c4s);
+            Noncollectables.Remove(c4s);
+        }
+               
         private void LoadCategory()
         {
             Categories = App.CategoRepo.GetEntitiesWithChildren();

@@ -15,7 +15,7 @@
 
         <Entry x:Name="categoryNameEntry" TextColor="MidnightBlue"  Placeholder="Category Name" Text="{Binding Catname}" />
         <Entry x:Name="ENTCategorydescriprion" Placeholder="Category description" Text="{Binding Description}"/>
-        <Button  Text="Add Category"  Command="{Binding  }"/>
+        <Button  Text="Add Category"  Command="{Binding AddCategoryCommand }"/>
         <Button x:Name="BNTDeleteCategory" Text="Delete category" Command="{Binding DeleteCategory}"/>
         <Label x:Name="LBLCATID" Text="{Binding SelectedCategory}"/>
         <ListView ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedItem}">

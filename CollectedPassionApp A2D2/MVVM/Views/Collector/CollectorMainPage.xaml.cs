@@ -1,4 +1,5 @@
 using CollectedPassionApp_A2D2.MVVM.Views.Manager;
+using Microsoft.Maui.Controls;
 namespace CollectedPassionApp_A2D2.MVVM.Views.Collector;
 
 public partial class CollectorMainPage : ContentPage
@@ -31,7 +32,7 @@ public partial class CollectorMainPage : ContentPage
 
     private void BTNEXIT_Clicked(object sender, EventArgs e)
     {
-
+        Application.Current.Quit();
     }
 
     private void BTNCollecterplace_Clicked(object sender, EventArgs e)

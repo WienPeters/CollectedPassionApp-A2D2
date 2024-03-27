@@ -5,8 +5,8 @@
              Shell.FlyoutBehavior="Disabled" Shell.NavBarIsVisible="False" BackgroundColor="#42a840">
 
     <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-        
-        <Image Source="logo.png" HeightRequest="100" BackgroundColor="#24784b" TranslationY="44"  Scale="2"/>
+
+        <Image Source="logo.png" HeightRequest="20" BackgroundColor="#24784b" Aspect="Center"  TranslationY="388"  TranslationX="33" Scale="2"/>
         <Label Text="Collected Passion Menu" FontAutoScalingEnabled="True" FontFamily="OpenSansRegular" TextColor="DarkSlateBlue" FontSize="37" LineBreakMode="TailTruncation" TranslationY="61" FontAttributes="Bold" BackgroundColor="#42a840"  VerticalOptions="StartAndExpand"  />
         <StackLayout Padding="33" Spacing="10" VerticalOptions="End" >
 

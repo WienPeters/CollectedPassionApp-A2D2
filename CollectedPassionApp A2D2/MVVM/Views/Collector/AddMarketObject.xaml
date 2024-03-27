@@ -20,12 +20,13 @@
         <Button x:Name="BTNLocation" Text="Click here to add your location" Clicked="BTNLocation_Clicked"   />
         <Entry Placeholder="Price of item?" Text="{Binding Price}"/>
         <Label Text="Item can be traded?" HorizontalOptions="Center" />
-        <Switch HorizontalOptions="Center" IsToggled="{Binding Tradeable}"/>
+        <Switch ThumbColor="Black" HorizontalOptions="Center" IsToggled="{Binding Tradeable}"/>
         <Button Text="Take Photo" Command="{Binding TakePhotoCommand}" />
         <Button Text="Pick Photo"  Command="{Binding PickPhotoCommand}" />
         <Image Source="{Binding ImagePath}" WidthRequest="200" HeightRequest="200"/>
 
         <Button Text="Add MarketCollectible" Command="{Binding AddNonCollectibleCommand}" />
         <Button x:Name="BTNGoToMarket" Text="View The Collectables Market" Clicked="BTNGoToMarket_Clicked"  />
+        <Button x:Name="BTNYour4Saleitems" Text="View/manage The items you've put up for sale" Clicked="BTNYour4Saleitems_Clicked"  />
     </VerticalStackLayout>
 </ContentPage>

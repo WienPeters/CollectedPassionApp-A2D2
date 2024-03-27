@@ -146,7 +146,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
         
         #endregion
         public ObservableCollection<Collectable4Sale> Items { get; set; } = new ObservableCollection<Collectable4Sale>();
-        public ObservableCollection<Collectable4Sale> FilteredItems { get; set; } = new ObservableCollection<Collectable4Sale>();
+        public ObservableCollection<Collectable4Sale> MItems { get; set; } = new ObservableCollection<Collectable4Sale>();
         public ObservableCollection<Category> categories { get; set; } = new ObservableCollection<Category> { };
         public List<Collectable> collectablesForSale {  get; set; } = new List<Collectable> { };
         
@@ -178,18 +178,23 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
         }
         private void GetNonCollectables()
         {
-
-
+            MItems.Clear();
             Items.Clear();
             Categories = App.CategoRepo.GetEntities();
+            int currentUserId = App.CurrentUserId;
             List<Collectable4Sale> noni = App.Market.GetEntitiesWithChildren();
             foreach (Collectable4Sale nollectable in noni)
             {
                 Items.Add(nollectable);
-               // foreach(Category nolt in  Collectable4Sale in Items) { nolt.Marketables.Equals(nollectable.categoryId.Equals(App.Market.GetEntitiesWithChildren())); }
+                foreach(Collectable4Sale isusers in Items )
+                {
+                    if (nollectable.userId == currentUserId)
+                    {
+                        MItems.Add(nollectable);
+                    }
+                }
             }
-            //ListView listView = new ListView();
-            //listView.SetBinding(ItemsView.ItemsSourceProperty, "Items");
+            
         }
         public void FillItems()
         {

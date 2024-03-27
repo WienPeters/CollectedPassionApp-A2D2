@@ -80,17 +80,21 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
         {
             GetAllCategories();
             Category cat = SelectedItem;
-            //AddCategoryCommand = new Command(
+            AddCategoryCommand = new Command(AddCategory);
             DeleteCategory = new Command(item => OnDelete(SelectedItem));
         }
 
-        private void AddCategory(string categoryName, string cateforyDesc)
+        private void AddCategory()
         {
-            if (!string.IsNullOrWhiteSpace(categoryName) | !string.IsNullOrWhiteSpace(cateforyDesc))
+            if (!string.IsNullOrWhiteSpace(Catname) && !string.IsNullOrWhiteSpace(Description))
             {
-                App.CategoRepo.SaveEntity(new Category { Catname = categoryName, Description = cateforyDesc });
-                Categories.Add(new Category { Catname = categoryName, Description = cateforyDesc });
+                App.CategoRepo.SaveEntity(new Category { Catname = Catname, Description = Description });
+                Categories.Add(new Category { Catname = Catname, Description = Description });
                 OnPropertyChanged(nameof(Categories));
+
+                // Clear input fields after adding category
+                Catname = string.Empty;
+                Description = string.Empty;
             }
         }
         private void OnDelete(Category cat)
