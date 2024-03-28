@@ -10,10 +10,13 @@
     <StackLayout>
         
         <Button x:Name="BTNAddMarketitem" Text="Put a Marketitem up for sale" Clicked="BTNAddMarketitem_Clicked"  />
-        <ListView  ItemsSource="{Binding MItems}" SelectedItem="{Binding ItemSelected}" SelectionMode="Single">
-          
-           
-
+        <Button x:Name="BTNDeleteMarketitem" Text="Delete selected marketitem" Command="{Binding DeleteAdvertItem}" />
+        <ListView  ItemsSource="{Binding MItems}" SelectedItem="{Binding SelectedCel4sell}" SelectionMode="Single">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell TextColor="MidnightBlue" Text="{Binding Name}" Detail="{Binding Description}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
    

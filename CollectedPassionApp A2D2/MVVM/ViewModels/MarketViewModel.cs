@@ -30,6 +30,19 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
                 }
             }
         }
+        //private List<Collectable4Sale> _collies;
+        //public List<Collectable4Sale> Collies
+        //{
+        //    get => _collies = App.CategoRepo.GetEntitiesWithChildren();
+        //    set
+        //    {
+        //        if (_categories != value)
+        //        {
+        //            _categories = value;
+        //            OnPropertyChanged(nameof(Categories));
+        //        }
+        //    }
+        //}
         private List<Appuser> _appusers;
         public List<Appuser> Appusers
         {
@@ -51,6 +64,16 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
             {
                 _selectedCategory = value;
                 OnPropertyChanged(nameof(SelectedCategory));
+            }
+        }
+        private Collectable4Sale _selectedCel4sell;
+        public Collectable4Sale SelectedCel4sell
+        {
+            get => _selectedCel4sell;
+            set
+            {
+                _selectedCel4sell = value;
+                OnPropertyChanged(nameof(SelectedCel4sell));
             }
         }
         private Appuser _selecteduser;
@@ -151,7 +174,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
         public List<Collectable> collectablesForSale {  get; set; } = new List<Collectable> { };
         
         public ICommand SearchCommand => new Command<string>(PerformSearch);
-
+        public ICommand DeleteAdvertItem { get; set; }
         
 
 
@@ -163,7 +186,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
         public MarketViewModel()
         {
             GetNonCollectables();
-            
+            DeleteAdvertItem = new Command(item => OnDelete(SelectedCel4sell));
 
 
         }
@@ -175,6 +198,12 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
             var allCollectables = user.Collecta4bles;
             List<Collectable4Sale> collectablesForSale =  allCollectables.OfType<Collectable4Sale>().ToList();
             var regularCollectables = allCollectables.Except(collectablesForSale).ToList();
+        }
+        private void OnDelete(Collectable4Sale cold)
+        {
+            App.Market.DeleteEntityWithChildren(cold);
+            MItems.Remove(cold);
+            
         }
         private void GetNonCollectables()
         {

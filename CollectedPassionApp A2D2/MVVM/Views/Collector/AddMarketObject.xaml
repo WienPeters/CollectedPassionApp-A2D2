@@ -16,7 +16,7 @@
 
         <Entry Placeholder="Collectible Name" Text="{Binding Name}"/>
         <Entry Placeholder="Description" Text="{Binding Description}"/>
-        <Entry x:Name="ENTLocation" Placeholder="Where's the item being sold" Text=""/>
+        <Entry x:Name="ENTLocation" Placeholder="Where's the item being sold" Text="{Binding GPSLocation}"/>
         <Button x:Name="BTNLocation" Text="Click here to add your location" Clicked="BTNLocation_Clicked"   />
         <Entry Placeholder="Price of item?" Text="{Binding Price}"/>
         <Label Text="Item can be traded?" HorizontalOptions="Center" />
