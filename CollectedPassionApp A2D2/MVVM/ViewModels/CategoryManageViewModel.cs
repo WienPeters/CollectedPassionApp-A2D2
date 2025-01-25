@@ -80,7 +80,7 @@ namespace CollectedPassionApp_A2D2.MVVM.ViewModels
         {
             GetAllCategories();
             Category cat = SelectedItem;
-            //AddCategoryCommand = new Command(
+            AddCategoryCommand = new Command(() => AddCategory(Catname, Description));
             DeleteCategory = new Command(item => OnDelete(SelectedItem));
         }
 
